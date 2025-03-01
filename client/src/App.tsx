@@ -1,13 +1,26 @@
-import { Hand } from "lucide-react";
+import { type JSX } from "react";
+import Home from "./pages/home/home";
+import Layout from "./pages/layout/layout";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
-function App() {
+const router = createBrowserRouter([
+  {
+    path: "/",
+    children: [
+      {
+        path: "/",
+        element: <Home />,
+      },
+    ],
+    element: <Layout />,
+  },
+]);
+
+function App(): JSX.Element {
   return (
     <div
       className={`w-full min-h-screen bg-primary text-dark font-montserra-text`}>
-      <div className={`flex gap-2`}>
-        Hello, there!
-        <Hand size={18} />
-      </div>
+      <RouterProvider router={router} />
     </div>
   );
 }
