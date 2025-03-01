@@ -1,14 +1,14 @@
 import {
-  BookmarkCheck,
+  Star,
   Home,
   LogOut,
   Settings,
-  SidebarClose,
   SidebarOpen,
-  Star,
+  SidebarClose,
+  BookmarkCheck,
 } from "lucide-react";
-import { JSX, useState } from "react";
-import { Link, NavLink, NavLinkRenderProps } from "react-router-dom";
+import { type JSX, useState } from "react";
+import { Link, NavLink, type NavLinkRenderProps } from "react-router-dom";
 
 function Sidebar(): JSX.Element {
   const [isOpen, setIsOpen] = useState<boolean>(false);

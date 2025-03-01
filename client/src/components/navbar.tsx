@@ -5,6 +5,7 @@ import {
   Search,
   UserRound,
   DollarSign,
+  BookOpen,
 } from "lucide-react";
 import { JSX } from "react";
 import { Link, NavLink, type NavLinkRenderProps } from "react-router-dom";
@@ -43,7 +44,7 @@ function Navbar(): JSX.Element {
           <li>
             <NavLink
               className={({ isActive }: NavLinkRenderProps): string =>
-                `px-4 py-2 rounded-lg flex justify-center items-center gap-2 ${
+                `px-4 py-2 rounded-lg flex justify-center items-center gap-2 duration-100 ${
                   isActive && "bg-tertiary font-medium text-white"
                 }`
               }
@@ -55,7 +56,7 @@ function Navbar(): JSX.Element {
           <li>
             <NavLink
               className={({ isActive }: NavLinkRenderProps): string =>
-                `px-4 py-2 rounded-lg flex justify-center items-center gap-2 ${
+                `px-4 py-2 rounded-lg flex justify-center items-center gap-2 duration-100 ${
                   isActive && "bg-tertiary font-medium text-white"
                 }`
               }
@@ -67,7 +68,7 @@ function Navbar(): JSX.Element {
           <li>
             <NavLink
               className={({ isActive }: NavLinkRenderProps): string =>
-                `px-4 py-2 rounded-lg flex justify-center items-center gap-2 ${
+                `px-4 py-2 rounded-lg flex justify-center items-center gap-2 duration-100 ${
                   isActive && "bg-tertiary font-medium text-white"
                 }`
               }
@@ -79,7 +80,7 @@ function Navbar(): JSX.Element {
           <li>
             <NavLink
               className={({ isActive }: NavLinkRenderProps): string =>
-                `px-4 py-2 rounded-lg flex justify-center items-center gap-2 ${
+                `px-4 py-2 rounded-lg flex justify-center items-center gap-2 duration-100 ${
                   isActive && "bg-tertiary font-medium text-white"
                 }`
               }
@@ -91,19 +92,19 @@ function Navbar(): JSX.Element {
           <li>
             <NavLink
               className={({ isActive }: NavLinkRenderProps): string =>
-                `px-4 py-2 rounded-lg flex justify-center items-center gap-2 ${
+                `px-4 py-2 rounded-lg flex justify-center items-center gap-2 duration-100 ${
                   isActive && "bg-tertiary font-medium text-white"
                 }`
               }
               to="/category/education">
-              <Castle size={16} />
+              <BookOpen size={16} />
               Education
             </NavLink>
           </li>
           <li>
             <NavLink
               className={({ isActive }: NavLinkRenderProps): string =>
-                `px-4 py-2 rounded-lg flex justify-center items-center gap-2 ${
+                `px-4 py-2 rounded-lg flex justify-center items-center gap-2 duration-100 ${
                   isActive && "bg-tertiary font-medium text-white"
                 }`
               }
@@ -115,7 +116,7 @@ function Navbar(): JSX.Element {
           <li>
             <NavLink
               className={({ isActive }: NavLinkRenderProps): string =>
-                `px-4 py-2 rounded-lg flex justify-center items-center gap-2 ${
+                `px-4 py-2 rounded-lg flex justify-center items-center gap-2 duration-100 ${
                   isActive && "bg-tertiary font-medium text-white"
                 }`
               }
