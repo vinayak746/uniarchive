@@ -15,7 +15,7 @@ function Navbar(): JSX.Element {
     <div
       className={`flex bg-primary sticky top-0 flex-col p-4 sm:p-8 gap-4 sm:gap-8`}>
       <nav className={`flex justify-between items-center gap-8`}>
-        <Link to={`/`} className={`text-2xl font-black uppercase`}>
+        <Link to={`/`} className={`text-2xl font-bold uppercase`}>
           UniArchive
         </Link>
         <label

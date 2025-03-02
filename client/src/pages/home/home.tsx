@@ -1,55 +1,71 @@
 import { type JSX } from "react";
-import shelfImage from "../../assets/shelf.png";
+import BookCard from "../../components/bookcard";
+import { Link } from "react-router-dom";
+import { LogIn } from "lucide-react";
 
 function Home(): JSX.Element {
   return (
     <div className={`flex flex-col gap-8 p-8`}>
-      <div className={`relative flex gap-8 flex-wrap justify-around items-end`}>
-        <div
-          className={`h-76
-           flex flex-col gap-4 z-10`}>
-          <div className={`text-5xl uppercase font-semibold leading-tight`}>
-            Popular <br />
-            Bestseller
+      <div
+        className={`flex flex-col gap-16 justify-center items-center sm:p-16 ma-w-2xl`}>
+        <div className={`flex flex-col gap-8 justify-center items-center`}>
+          <div className={`text-5xl text-center sm:text-6xl font-bold`}>
+            Knowledge Resource Center <br />- Library
           </div>
-          <div className={`text-lg max-w-xs`}>
-            We picked up the most popular books for you, based on your taste.
-            <br />
-            Check it!
-          </div>
-          <div className={`flex justify-center items-center`}>
-            <button
-              className={`px-8 py-2 text-lg bg-tertiary rounded-lg w-fit text-white font-semibold`}>
-              Watch full list
-            </button>
+          <div
+            className={`text-xl xl:text-3xl sm:text-2xl text-center text-dark/80`}>
+            Your gateway to a world of information and inspiration{" "}
           </div>
         </div>
-        <img
-          className={`h-76
-             aspect-[3/4] temp object-cover rounded-lg  z-10`}
+
+        <Link
+          to={`/checkin-out`}
+          className={`flex justify-center items-center gap-2`}>
+          <button
+            className={`px-8 py-2 flex justify-center items-center gap-2 text-lg bg-tertiary rounded-lg w-fit text-white font-semibold cursor-pointer`}>
+            Check in/out
+            <LogIn size={24} />
+          </button>
+        </Link>
+      </div>
+      <hr className={`my-8 border-t border-dark/50`} />
+      <div className={`flex gap-8 flex-wrap justify-around items-end`}>
+        <div className={`h-84 flex flex-col gap-12 z-10`}>
+          <div className={`flex flex-col gap-4`}>
+            <div
+              className={`text-4xl sm:text-5xl uppercase font-bold leading-tight`}>
+              Recommended
+              <br />
+              Reads
+            </div>
+            <div className={`text-lg max-w-xs`}>
+              We picked up the most popular books for you.
+              <br />
+              Check them out!
+            </div>
+          </div>
+          <Link to={`/category`} className={`flex justify-center items-center`}>
+            <button
+              className={`px-8 py-2 text-lg bg-tertiary rounded-lg w-fit text-white font-semibold cursor-pointer`}>
+              Watch full list
+            </button>
+          </Link>
+        </div>
+        <BookCard
           src="https://admin.itsnicethat.com/images/XSRykZCRQhGROOBt6Yug8QTbykI=/95588/format-webp%7Cwidth-1440/54e335375c3e3c758b0000f5.jpg"
-          alt="book cover"
+          alt={`book cover`}
+          size="lg"
         />
-        <img
-          className={`h-64 aspect-[3/4] temp object-cover rounded-lg  z-10`}
+        <BookCard
           src="https://admin.itsnicethat.com/images/XSRykZCRQhGROOBt6Yug8QTbykI=/95588/format-webp%7Cwidth-1440/54e335375c3e3c758b0000f5.jpg"
-          alt="book cover"
+          alt={`book cover`}
+          size="md"
         />
-        <img
-          className={`h-60 aspect-[3/4] temp object-cover rounded-lg  z-10`}
+        <BookCard
           src="https://admin.itsnicethat.com/images/XSRykZCRQhGROOBt6Yug8QTbykI=/95588/format-webp%7Cwidth-1440/54e335375c3e3c758b0000f5.jpg"
-          alt="book cover"
+          alt={`book cover`}
+          size="sm"
         />
-        <img
-          className={`h-60 aspect-[3/4] temp object-cover rounded-lg  z-10`}
-          src="https://admin.itsnicethat.com/images/XSRykZCRQhGROOBt6Yug8QTbykI=/95588/format-webp%7Cwidth-1440/54e335375c3e3c758b0000f5.jpg"
-          alt="book cover"
-        />
-        {/* <img
-          className={`absolute top-16 w-full bg-pink-500 h-96`}
-          src={shelfImage}
-          alt="bookshelf"
-        /> */}
       </div>
     </div>
   );
