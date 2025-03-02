@@ -13,7 +13,7 @@ function BookCard({
     <img
       {...rest}
       className={`h-60 ${
-        size == "sm" ? "sm:h-60" : size === "md" ? "sm:h-68" : "sm:h-76"
+        size == "sm" ? "sm:h-62" : size === "md" ? "sm:h-72" : "sm:h-82"
       } aspect-[3/4] temp object-cover rounded-lg  z-10 ${className}`}
     />
   );

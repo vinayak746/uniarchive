@@ -7,10 +7,14 @@ import {
   DollarSign,
   BookOpen,
 } from "lucide-react";
-import { JSX } from "react";
+import { type JSX } from "react";
 import { Link, NavLink, type NavLinkRenderProps } from "react-router-dom";
 
-function Navbar(): JSX.Element {
+interface NavbarProps {
+  onlyMain?: boolean;
+}
+
+function Navbar({ onlyMain = false }: NavbarProps): JSX.Element {
   return (
     <div
       className={`flex bg-primary sticky top-0 flex-col p-4 sm:p-8 gap-4 sm:gap-8`}>
@@ -39,7 +43,7 @@ function Navbar(): JSX.Element {
           Yash
         </div>
       </nav>
-      <nav className={``}>
+      <nav className={`${onlyMain && "hidden"}`}>
         <ul className={`flex justify-center gap-2 flex-wrap`}>
           <li>
             <NavLink

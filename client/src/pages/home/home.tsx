@@ -1,7 +1,7 @@
 import { type JSX } from "react";
-import BookCard from "../../components/bookcard";
-import { Link } from "react-router-dom";
 import { LogIn } from "lucide-react";
+import { Link } from "react-router-dom";
+import BookCard from "../../components/bookcard";
 
 function Home(): JSX.Element {
   return (
@@ -22,7 +22,7 @@ function Home(): JSX.Element {
           to={`/checkin-out`}
           className={`flex justify-center items-center gap-2`}>
           <button
-            className={`px-8 py-2 flex justify-center items-center gap-2 text-lg bg-tertiary rounded-lg w-fit text-white font-semibold cursor-pointer`}>
+            className={`px-8 py-4 flex justify-center items-center gap-2 text-2xl bg-tertiary rounded-lg w-fit text-white font-medium cursor-pointer`}>
             Check in/out
             <LogIn size={24} />
           </button>

@@ -1,4 +1,4 @@
-import { JSX } from "react";
+import { type JSX } from "react";
 import Navbar from "../../components/navbar";
 import Sidebar from "../../components/sidebar";
 import { Outlet } from "react-router-dom";
