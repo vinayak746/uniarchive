@@ -10,3 +10,22 @@
   --color-tertiary: #fca72c;
   --color-dark: #725b3a;
 }
+
+.scrollbar::-webkit-scrollbar {
+  @apply w-2;
+}
+
+/* Track */
+.scrollbar::-webkit-scrollbar-track {
+  @apply bg-dark/40;
+}
+
+/* Handle */
+.scrollbar::-webkit-scrollbar-thumb {
+  @apply bg-dark/80;
+}
+
+/* Handle on hover */
+.scrollbar::-webkit-scrollbar-thumb:hover {
+  @apply bg-dark;
+}

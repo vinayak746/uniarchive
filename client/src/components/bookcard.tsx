@@ -1,4 +1,4 @@
-import { ImgHTMLAttributes, type JSX } from "react";
+import { type ImgHTMLAttributes, type JSX } from "react";
 
 interface BookCardProps extends ImgHTMLAttributes<HTMLImageElement> {
   size?: "sm" | "md" | "lg";

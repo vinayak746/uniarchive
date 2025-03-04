@@ -1,30 +1,30 @@
 import { type JSX } from "react";
-import { LogIn } from "lucide-react";
 import { Link } from "react-router-dom";
+import { DoorOpen } from "lucide-react";
 import BookCard from "../../components/bookcard";
 
-function Home(): JSX.Element {
+function HomePage(): JSX.Element {
   return (
     <div className={`flex flex-col gap-8 p-8`}>
       <div
         className={`flex flex-col gap-16 justify-center items-center sm:p-16 ma-w-2xl`}>
         <div className={`flex flex-col gap-8 justify-center items-center`}>
           <div className={`text-5xl text-center sm:text-6xl font-bold`}>
-            Knowledge Resource Center <br />- Library
+            Knowledge Resource Center
+            <br />- Library
           </div>
           <div
             className={`text-xl xl:text-3xl sm:text-2xl text-center text-dark/80`}>
             Your gateway to a world of information and inspiration{" "}
           </div>
         </div>
-
         <Link
           to={`/checkin-out`}
           className={`flex justify-center items-center gap-2`}>
           <button
-            className={`px-8 py-4 flex justify-center items-center gap-2 text-2xl bg-tertiary rounded-lg w-fit text-white font-medium cursor-pointer`}>
-            Check in/out
-            <LogIn size={24} />
+            className={`px-6 py-3 flex justify-center items-center gap-2 text-xl bg-tertiary rounded-lg w-fit text-white font-medium cursor-pointer`}>
+            <span>Check in/out</span>
+            <DoorOpen size={24} />
           </button>
         </Link>
       </div>
@@ -71,4 +71,4 @@ function Home(): JSX.Element {
   );
 }
 
-export default Home;
+export default HomePage;

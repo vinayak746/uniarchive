@@ -1,4 +1,4 @@
-import { ButtonHTMLAttributes, type JSX } from "react";
+import { type ButtonHTMLAttributes, type JSX } from "react";
 
 interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   icon?: JSX.Element;

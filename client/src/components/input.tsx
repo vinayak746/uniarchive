@@ -1,4 +1,4 @@
-import { InputHTMLAttributes, useId, type JSX } from "react";
+import { useId, type InputHTMLAttributes, type JSX } from "react";
 
 interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
   labelText: string;

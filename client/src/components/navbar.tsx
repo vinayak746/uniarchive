@@ -6,42 +6,65 @@ import {
   UserRound,
   DollarSign,
   BookOpen,
+  LogIn,
 } from "lucide-react";
 import { type JSX } from "react";
-import { Link, NavLink, type NavLinkRenderProps } from "react-router-dom";
+import {
+  Link,
+  NavLink,
+  useRouteLoaderData,
+  type NavLinkRenderProps,
+} from "react-router-dom";
+import RootLayoutLoader, { SessionData } from "../pages/layout/layout.loader";
 
 interface NavbarProps {
   onlyMain?: boolean;
 }
 
 function Navbar({ onlyMain = false }: NavbarProps): JSX.Element {
+  const session = useRouteLoaderData<typeof RootLayoutLoader>(
+    "layout"
+  ) as SessionData;
+
   return (
     <div
-      className={`flex bg-primary sticky top-0 flex-col p-4 sm:p-8 gap-4 sm:gap-8`}>
+      className={`flex bg-primary sticky top-0 flex-col p-4 sm:p-8 gap-4 sm:gap-8 z-20`}>
       <nav className={`flex justify-between items-center gap-8`}>
         <Link to={`/`} className={`text-2xl font-bold uppercase`}>
           UniArchive
         </Link>
-        <label
-          className={`px-4 py-2 hidden sm:flex gap-2 grow max-w-md outline-none border border-dark/50 bg-white rounded-xl items-center`}
-          htmlFor="search">
-          <button>
-            <Search size={20} />
-          </button>
-          <input
-            className={`grow outline-none`}
-            type="text"
-            id="search"
-            placeholder={`Search name of the book or author...`}
-          />
-        </label>
-        <div className={`flex justify-center items-center gap-2`}>
-          <div
-            className={`flex justify-center items-center p-2 bg-secondary border border-dark/50 rounded-full`}>
-            <UserRound size={24} />
-          </div>
-          Yash
-        </div>
+        {!onlyMain && (
+          <>
+            <label
+              className={`px-4 py-2 hidden sm:flex gap-2 grow max-w-md outline-none border border-dark/50 bg-white rounded-xl items-center`}
+              htmlFor="search">
+              <button>
+                <Search size={20} />
+              </button>
+              <input
+                className={`grow outline-none`}
+                type="search"
+                id="search"
+                placeholder={`Search name of the book or author...`}
+              />
+            </label>
+            {session.loggedIn ? (
+              <div className={`flex justify-center items-center gap-2`}>
+                <div
+                  className={`flex justify-center items-center p-2 bg-secondary border border-dark/50 rounded-full`}>
+                  <UserRound size={24} />
+                </div>
+                {session.user.name}
+              </div>
+            ) : (
+              <Link
+                to={`/login`}
+                className={`flex gap-2 justify-center items-center px-4 py-2 bg-tertiary text-white font-medium rounded-lg`}>
+                Login <LogIn size={16} />
+              </Link>
+            )}
+          </>
+        )}
       </nav>
       <nav className={`${onlyMain && "hidden"}`}>
         <ul className={`flex justify-center gap-2 flex-wrap`}>

@@ -1,4 +1,8 @@
-import { ActionFunction, ActionFunctionArgs } from "react-router-dom";
+import { type ActionFunction, type ActionFunctionArgs } from "react-router-dom";
+import server from "../../utils/axios.util";
+import { type AxiosResponse } from "axios";
+import { type ResponseType } from "../../utils/response.util";
+import { toast } from "react-toastify";
 
 export interface LoginData {
   uid: string;
@@ -7,21 +11,36 @@ export interface LoginData {
 
 const LoginAction: ActionFunction = ({
   request,
-  context,
-}: ActionFunctionArgs): Promise<void> => {
-  console.log(context);
-  return new Promise(
+}: ActionFunctionArgs): Promise<Response | void> => {
+  return new Promise<Response | void>(
     (
-      resolve: (value: void) => void
-      //   reject: (reason?: unknown) => void
+      resolve: (value: Response | void) => void,
+      reject: (reason?: unknown) => void
     ): void => {
       request.formData().then((formData: FormData): void => {
-        const data: LoginData = {
+        const { uid, password }: LoginData = {
           uid: formData.get("uid") as string,
           password: formData.get("password") as string,
         };
-        console.log(data);
-        resolve();
+        server
+          .post("/api/user/login", {
+            uid,
+            password,
+          })
+          .then((res: AxiosResponse<ResponseType>): void => {
+            const data: ResponseType = res.data;
+            if (!data.success) {
+              data.errors.forEach((error: string): void => {
+                toast.error(error);
+              });
+              reject();
+              return;
+            }
+            toast.success("Logged in Successfully");
+            resolve();
+            return;
+          })
+          .catch(reject);
       });
     }
   );

@@ -1,6 +1,6 @@
 import { type JSX } from "react";
 
-function NotFound(): JSX.Element {
+function NotFoundPage(): JSX.Element {
   return (
     <div className={`flex grow justify-center items-center p-4`}>
       <div className={`flex gap-8 flex-col justify-center mx-auto`}>
@@ -18,4 +18,4 @@ function NotFound(): JSX.Element {
   );
 }
 
-export default NotFound;
+export default NotFoundPage;
