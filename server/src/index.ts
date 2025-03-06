@@ -20,10 +20,13 @@ app.use(express.json());
 app.use(cookieParser());
 app.use(express.urlencoded({ extended: true }));
 
+// allow all cookies to be sent from the client to the server (CORS)
 app.use(
   cors({
-    origin: CLIENT_URL,
+    origin: true,
     credentials: true,
+    allowedHeaders: ["Content-Type", "Authorization"],
+    methods: ["GET", "POST", "PUT", "DELETE"],
   })
 );
 app.use(helmet());

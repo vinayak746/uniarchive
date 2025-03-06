@@ -7,6 +7,7 @@ import {
 import { type Request, type Response } from "express";
 import { type ResponseType } from "../../../utils/response.util";
 import User, { type UserInterface } from "../../../db/models/user.model";
+import logger from "../../../utils/logger/index.logger.util";
 
 type RefreshUserResponseData = Pick<UserInterface, "uid" | "name">;
 
@@ -14,6 +15,14 @@ export default function RefreshUserRoute(
   req: Request,
   res: Response<ResponseType<RefreshUserResponseData>>
 ): void {
+  const token = req.cookies["session"];
+  logger.info(`\n\n
+  token: ${token}
+    \n\n`);
+  logger.info(`\n\n
+      cookies: ${JSON.stringify(req.cookies)}
+        \n\n`);
+
   const session: SessionPayload | null = getSession<SessionPayload>(req);
   if (!session) {
     res.json({
