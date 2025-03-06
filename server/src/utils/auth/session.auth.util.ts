@@ -13,8 +13,10 @@ export function createSession<T = SessionPayload>(
 ): void {
   const token: string = signJWT<T>(payload);
 
+  logger.info({ NODE_ENV: process.env.NODE_ENV });
+
   res.cookie("session", token, {
-    sameSite: "lax",
+    sameSite: "none",
     path: "/",
     httpOnly: true,
     secure: process.env.NODE_ENV !== "production",

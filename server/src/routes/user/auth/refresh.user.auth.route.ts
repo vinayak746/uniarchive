@@ -15,13 +15,7 @@ export default function RefreshUserRoute(
   req: Request,
   res: Response<ResponseType<RefreshUserResponseData>>
 ): void {
-  const token = req.cookies["session"];
-  logger.info(`\n\n
-  token: ${token}
-    \n\n`);
-  logger.info(`\n\n
-      cookies: ${JSON.stringify(req.cookies)}
-        \n\n`);
+  logger.info(`cookies: ${JSON.stringify(req.cookies)}`);
 
   const session: SessionPayload | null = getSession<SessionPayload>(req);
   if (!session) {
