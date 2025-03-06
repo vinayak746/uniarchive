@@ -1,6 +1,6 @@
-import { createWriteStream } from "node:fs";
 import path from "node:path";
-import pino, { Logger, multistream, StreamEntry } from "pino";
+import { createWriteStream } from "node:fs";
+import pino, { type Logger, multistream, type StreamEntry } from "pino";
 
 const streams: StreamEntry[] = [
   {
