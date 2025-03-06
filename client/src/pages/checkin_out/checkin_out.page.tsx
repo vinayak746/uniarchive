@@ -1,67 +1,50 @@
-import { useEffect, type JSX } from "react";
+import { toast } from "react-toastify";
 import { ScanQrCode } from "lucide-react";
-import { Html5QrcodeScanner, Html5QrcodeScanType } from "html5-qrcode";
+import { type AxiosResponse } from "axios";
+import server from "../../utils/axios.util";
+import QRCodeScanner from "../../components/qrscanner";
+import { type RefObject, useRef, type JSX } from "react";
+import { type ResponseType } from "../../utils/response.util";
 
 function CheckInOutPage(): JSX.Element {
-  useEffect((): (() => void) => {
-    const qrCodeScanner = new Html5QrcodeScanner(
-      "qr-reader",
-      {
-        fps: 10,
-        qrbox: 250,
-        rememberLastUsedCamera: true,
-        showTorchButtonIfSupported: true,
-        videoConstraints: {
-          facingMode: "environment",
-          aspectRatio: { exact: 1 },
-          backgroundBlur: true,
-        },
-        aspectRatio: 1,
-        supportedScanTypes: [Html5QrcodeScanType.SCAN_TYPE_CAMERA],
-      },
-      false
-    );
-
-    qrCodeScanner.render(
-      (decodedText: string): void => {
-        console.log("Decoded QR Code:", decodedText);
-      },
-      (): void => {}
-    );
-
-    const scanRegion: HTMLElement | null = document.getElementById(
-      "qr-reader__scan_region"
-    );
-    if (scanRegion) {
-      scanRegion.classList.add(
-        "flex",
-        "flex-col",
-        "justify-center",
-        "items-center",
-        "rounded-2xl",
-        "aspect-square"
-      );
-    }
-
-    return (): void => {
-      qrCodeScanner.clear();
-    };
-  }, []);
-
+  const qrText: RefObject<string | null> = useRef(null);
   return (
     <div
       className={`flex flex-col w-full grow justify-center items-center p-8 gap-8`}>
+      <QRCodeScanner
+        onSuccessCB={(decodedString: string): void => {
+          if (qrText.current === decodedString) return;
+          setTimeout((): void => {
+            qrText.current = null;
+          }, 5000);
+          toast.success("QR Code Scanned");
+          qrText.current = decodedString;
+          server.post("/api/user/checkinout", { code: decodedString }).then(
+            ({
+              data,
+            }: AxiosResponse<
+              ResponseType<{
+                checkedIn: boolean;
+              }>
+            >): void => {
+              if (data.success) {
+                if (data.data?.checkedIn) {
+                  toast.success("Checked In Successfully");
+                } else {
+                  toast.success("Checked Out Successfully");
+                }
+              } else {
+                data.errors.forEach((error: string): void => {
+                  toast.error(error);
+                });
+              }
+            }
+          );
+        }}
+      />
+
       <div
-        className={`flex justify-center items-center bg-primary p-4 rounded-3xl border border-dark/50  overflow-hidden`}>
-        <div className={`h-64 flex aspect-square rounded-3xl overflow-hidden`}>
-          <div
-            className={`flex grow flex-col justify-center items-center text-center`}
-            id="qr-reader"
-          />
-        </div>
-      </div>
-      <div
-        className={`flex  gap-2 justify-center items-center flex-col text-center`}>
+        className={`flex gap-2 justify-center items-center flex-col text-center`}>
         <ScanQrCode className={`text-dark/80`} size={40} />
         <div>
           Scan the QR code in the library <br />

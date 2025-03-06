@@ -8,27 +8,32 @@ import {
   BookOpen,
   LogIn,
 } from "lucide-react";
-import { type JSX } from "react";
 import {
   Link,
   NavLink,
   useRouteLoaderData,
   type NavLinkRenderProps,
 } from "react-router-dom";
+import { type HTMLAttributes, type JSX } from "react";
 import RootLayoutLoader, { SessionData } from "../pages/layout/layout.loader";
 
-interface NavbarProps {
+interface NavbarProps extends HTMLAttributes<HTMLDivElement> {
   onlyMain?: boolean;
 }
 
-function Navbar({ onlyMain = false }: NavbarProps): JSX.Element {
+function Navbar({
+  onlyMain = false,
+  className,
+  ...rest
+}: NavbarProps): JSX.Element {
   const session = useRouteLoaderData<typeof RootLayoutLoader>(
     "layout"
   ) as SessionData;
 
   return (
     <div
-      className={`flex bg-primary sticky top-0 flex-col p-4 sm:p-8 gap-4 sm:gap-8 z-20`}>
+      {...rest}
+      className={`flex bg-primary sticky top-0 flex-col p-4 sm:p-8 gap-4 sm:gap-8 z-20 ${className}`}>
       <nav className={`flex justify-between items-center gap-8`}>
         <Link to={`/`} className={`text-2xl font-bold uppercase`}>
           UniArchive

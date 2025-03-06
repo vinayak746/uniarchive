@@ -1,8 +1,8 @@
-import { type ActionFunction, type ActionFunctionArgs } from "react-router-dom";
-import server from "../../utils/axios.util";
-import { type AxiosResponse } from "axios";
-import { type ResponseType } from "../../utils/response.util";
 import { toast } from "react-toastify";
+import { type AxiosResponse } from "axios";
+import server from "../../utils/axios.util";
+import { type ResponseType } from "../../utils/response.util";
+import { type ActionFunction, type ActionFunctionArgs } from "react-router-dom";
 
 export interface LoginData {
   uid: string;
@@ -13,17 +13,14 @@ const LoginAction: ActionFunction = ({
   request,
 }: ActionFunctionArgs): Promise<Response | void> => {
   return new Promise<Response | void>(
-    (
-      resolve: (value: Response | void) => void,
-      reject: (reason?: unknown) => void
-    ): void => {
+    (resolve: (value: Response | void) => void): void => {
       request.formData().then((formData: FormData): void => {
         const { uid, password }: LoginData = {
           uid: formData.get("uid") as string,
           password: formData.get("password") as string,
         };
         server
-          .post("/api/user/login", {
+          .post("/api/user/auth/login", {
             uid,
             password,
           })
@@ -33,14 +30,18 @@ const LoginAction: ActionFunction = ({
               data.errors.forEach((error: string): void => {
                 toast.error(error);
               });
-              reject();
+              resolve();
               return;
             }
             toast.success("Logged in Successfully");
             resolve();
             return;
           })
-          .catch(reject);
+          .catch((err: Error): void => {
+            console.error(err);
+            toast.error("Failed to Login");
+            resolve();
+          });
       });
     }
   );

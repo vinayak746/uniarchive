@@ -3,8 +3,9 @@
 @import "tailwindcss";
 
 @theme {
-  --font-libre-caslon-text: "Libre Caslon Text", serif;
   --font-montserrat-text: "Montserrat", sans-serif;
+  --font-libre-caslon-text: "Libre Caslon Text", serif;
+
   --color-primary: #f2e5d0;
   --color-secondary: #f9f3ee;
   --color-tertiary: #fca72c;

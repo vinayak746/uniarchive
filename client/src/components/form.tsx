@@ -1,8 +1,8 @@
-import { type JSX } from "react";
 import {
   Form as RRForm,
   type FormProps as RRFormProps,
 } from "react-router-dom";
+import { type JSX } from "react";
 
 interface FormProps extends RRFormProps {
   formHeading: string;

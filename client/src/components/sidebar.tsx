@@ -7,13 +7,13 @@ import {
   SidebarClose,
   FileText,
 } from "lucide-react";
-import { type JSX, useState } from "react";
 import {
   Link,
   NavLink,
   useRouteLoaderData,
   type NavLinkRenderProps,
 } from "react-router-dom";
+import { type JSX, useState } from "react";
 import RootLayoutLoader, { SessionData } from "../pages/layout/layout.loader";
 
 function Sidebar(): JSX.Element {

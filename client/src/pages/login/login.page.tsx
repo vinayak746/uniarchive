@@ -1,10 +1,10 @@
 import { type JSX } from "react";
 import { LogIn } from "lucide-react";
+import { Link } from "react-router-dom";
 import Form from "../../components/form";
 import Input from "../../components/input";
 import Navbar from "../../components/navbar";
 import Button from "../../components/button";
-import { Link } from "react-router-dom";
 
 function LoginPage(): JSX.Element {
   return (
