@@ -13,10 +13,12 @@ export const PORT: string | number = process.env.PORT || 8080;
 export const MONGO_URI: string = process.env.MONGO_URI;
 export const JWT_SECRET: Secret = process.env.JWT_SECRET;
 export const CLIENT_URL: string = process.env.CLIENT_URL;
+export const IS_DEV: boolean = process.env.NODE_ENV !== "production";
 
 logger.info({
   PORT,
   MONGO_URI,
   JWT_SECRET,
   CLIENT_URL,
+  IS_DEV,
 });

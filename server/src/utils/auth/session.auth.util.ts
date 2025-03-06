@@ -1,5 +1,7 @@
 import type { Request, Response } from "express";
 import { signJWT, verifyJWT } from "./jwt.auth.util";
+import logger from "../logger/index.logger.util";
+import { IS_DEV } from "../const.utils";
 
 export interface SessionPayload {
   _id?: string;
@@ -13,13 +15,17 @@ export function createSession<T = SessionPayload>(
 
   res.cookie("session", token, {
     httpOnly: true,
-    secure: process.env.NODE_ENV === "production",
+    secure: !IS_DEV,
     sameSite: "lax",
   });
 }
 
 export function getSession<T = SessionPayload>(req: Request): T | null {
-  const token: string = req.cookies.session;
+  const token: string = req.cookies["session"];
+  logger.info({ token });
+  if (!token) {
+    return null;
+  }
   try {
     return verifyJWT<T>(token);
   } catch (error) {
