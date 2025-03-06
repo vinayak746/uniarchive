@@ -13,6 +13,7 @@ import { signJWT } from "../../../utils/auth/jwt.auth.util";
 import type { NextFunction, Request, Response } from "express";
 import { createUser } from "../../../controller/user.controller";
 import { type ResponseType } from "../../../utils/response.util";
+import { createSession } from "../../../utils/auth/session.auth.util";
 
 type UserRegisterBody = Pick<UserInterface, "name" | "uid" | "role"> & {
   password: string;
@@ -53,16 +54,12 @@ export default function UserRegisterRoute(
     role: data.role,
   })
     .then((user: UserInterface): void => {
-      const token: string = signJWT({
-        _id: user._id,
-      });
-
-      res.cookie("jwt", token, {
-        httpOnly: true,
-        secure: true,
-        sameSite: "lax",
-        expires: new Date(Date.now() + 24 * 60 * 60 * 1000),
-      });
+      createSession(
+        {
+          _id: user._id,
+        },
+        res
+      );
 
       res.json({
         success: true,
