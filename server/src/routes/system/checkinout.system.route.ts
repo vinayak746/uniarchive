@@ -10,7 +10,6 @@ export default function CheckInOutSystemRoute(
   >
 ): void {
   const now: number = Math.floor(Date.now() / (40 * 1000));
-  console.log(now);
   // data for qrcode for checkin/out
   const code: string = Buffer.from(now.toString()).toString("base64");
 

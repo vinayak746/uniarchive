@@ -38,7 +38,6 @@ export default function CheckInOutUserRoute(
   const { code } = data;
 
   const qrCodeTime: number = parseInt(Buffer.from(code, "base64").toString());
-  logger.info(`QR Code Time: ${qrCodeTime}`);
   if (isNaN(qrCodeTime)) {
     res.status(200).json({
       success: false,
