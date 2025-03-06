@@ -22,7 +22,8 @@ export function createSession<T = SessionPayload>(
 
 export function getSession<T = SessionPayload>(req: Request): T | null {
   const token: string = req.cookies["session"];
-  logger.info({ token });
+  logger.info({ token: token || "token undefined" });
+  logger.info({ cookies: req.cookies || "cookies undefined" });
   if (!token) {
     return null;
   }
