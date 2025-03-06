@@ -25,7 +25,6 @@ const streams: StreamEntry[] = [
 const logger: Logger = pino(
   {
     name: "uniarchive",
-    level: "info",
   },
   multistream(streams)
 );

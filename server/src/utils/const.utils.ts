@@ -14,7 +14,7 @@ export const MONGO_URI: string = process.env.MONGO_URI;
 export const JWT_SECRET: Secret = process.env.JWT_SECRET;
 export const CLIENT_URL: string = process.env.CLIENT_URL;
 
-logger.debug({
+logger.info({
   PORT,
   MONGO_URI,
   JWT_SECRET,
