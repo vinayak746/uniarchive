@@ -48,6 +48,6 @@ app.use((err: Error, req: Request, res: Response, next: NextFunction): void => {
 
 app.listen(PORT, (): void => {
   console.clear();
-  logger.info(`Server is running on http://localhost:${PORT}`);
+  logger.info(`Server is running on http://0.0.0.0:${PORT}`);
   connectToDB();
 });

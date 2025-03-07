@@ -7,6 +7,7 @@ import type { Request, Response } from "express";
 import logger from "../../utils/logger/index.logger.util";
 import { type ResponseType } from "../../utils/response.util";
 import User, { type UserInterface } from "../../db/models/user.model";
+import { QR_ROLL_TIME_S } from "../../utils/const.utils";
 
 const checkInOutSchema = z.object({
   code: z.string({
@@ -36,16 +37,18 @@ export default function CheckInOutUserRoute(
     return;
   }
   const { code } = data;
+  logger.info({ code });
 
-  const qrCodeTime: number = parseInt(Buffer.from(code, "base64").toString());
+  const qrCodeTime: number = parseInt(atob(code)) / (QR_ROLL_TIME_S * 1000);
   if (isNaN(qrCodeTime)) {
     res.status(200).json({
       success: false,
-      errors: ["Invalid code"],
+      errors: [`Invalid code ${code}`],
     });
     return;
   }
-  const now: number = Date.now() / (40 * 1000);
+  const now: number = Date.now() / (QR_ROLL_TIME_S * 1000);
+  logger.info({ now, qrCodeTime });
   if (Math.abs(now - qrCodeTime) > 1) {
     res.status(200).json({
       success: false,
