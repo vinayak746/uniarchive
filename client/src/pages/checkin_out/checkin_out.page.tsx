@@ -5,9 +5,15 @@ import server from "../../utils/axios.util";
 import QRCodeScanner from "../../components/qrscanner";
 import { type RefObject, useRef, type JSX } from "react";
 import { type ResponseType } from "../../utils/response.util";
+import { useRouteLoaderData } from "react-router-dom";
+import RootLayoutLoader, { SessionData } from "../layout/layout.loader";
 
 function CheckInOutPage(): JSX.Element {
+  const session: SessionData = useRouteLoaderData<typeof RootLayoutLoader>(
+    "layout"
+  ) as SessionData;
   const qrText: RefObject<string | null> = useRef(null);
+
   return (
     <div
       className={`flex flex-col w-full grow justify-center items-center p-8 gap-8`}>
@@ -17,7 +23,6 @@ function CheckInOutPage(): JSX.Element {
           setTimeout((): void => {
             qrText.current = null;
           }, 5000);
-          toast.success("QR Code Scanned");
           qrText.current = decodedString;
           server.post("/api/user/checkinout", { code: decodedString }).then(
             ({
@@ -28,11 +33,13 @@ function CheckInOutPage(): JSX.Element {
               }>
             >): void => {
               if (data.success) {
-                if (data.data?.checkedIn) {
-                  toast.success("Checked In Successfully");
-                } else {
-                  toast.success("Checked Out Successfully");
-                }
+                if (session.loggedIn)
+                  if (data.data?.checkedIn) {
+                    // always true, but just for type checking
+                    toast.success(`Checked In as ${session.user.name}`);
+                  } else {
+                    toast.success(`Checked Out as ${session.user.name}`);
+                  }
               } else {
                 data.errors.forEach((error: string): void => {
                   toast.error(error);

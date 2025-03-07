@@ -29,6 +29,7 @@ const RootLayoutLoader: LoaderFunction = (): Promise<SessionData> => {
       server
         .post("/api/user/auth/refresh")
         .then(({ data }: AxiosResponse<ResponseType<SessionData>>): void => {
+          console.log(data);
           if (data.success) {
             //   toast.success("Session Refreshed");
             if (!data.data) {

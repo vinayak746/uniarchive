@@ -11,7 +11,8 @@ export default function SystemLayout(): JSX.Element {
         <div title={`system user`}>
           <UserCog />
         </div>
-        <div className={`grow bg-secondary rounded-4xl p-4 sm:p-8`}>
+        <div
+          className={`flex flex-col grow bg-secondary rounded-4xl p-4 sm:p-8`}>
           <Outlet />
         </div>
       </div>

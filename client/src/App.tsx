@@ -17,7 +17,6 @@ import CheckInOutPage from "./pages/checkin_out/checkin_out.page";
 import CheckInOutLoader from "./pages/checkin_out/checkin_out.loader";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import CheckInOutSystemPage from "./pages/system/checkinout.system/checkinout.system.page";
-import checkInOutSystemLoader from "./pages/system/checkinout.system/checkinout.system.loader";
 
 const router = createBrowserRouter([
   {
@@ -45,7 +44,6 @@ const router = createBrowserRouter([
     children: [
       {
         path: "checkinout",
-        loader: checkInOutSystemLoader,
         element: <CheckInOutSystemPage />,
       },
     ],
