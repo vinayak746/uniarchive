@@ -33,5 +33,10 @@ export function getSession<T = SessionPayload>(req: Request): T | null {
 }
 
 export function destroySession(res: Response): void {
-  res.clearCookie("session");
+  res.clearCookie("session", {
+    sameSite: IS_DEV ? "lax" : "none",
+    path: "/",
+    httpOnly: true,
+    secure: !IS_DEV,
+  });
 }
