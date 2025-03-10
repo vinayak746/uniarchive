@@ -18,7 +18,7 @@ export default function RefreshUserRoute(
   if (!session) {
     res.json({
       success: false,
-      errors: ["Unauthorized"],
+      errors: [],
     });
     return;
   }
