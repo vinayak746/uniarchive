@@ -1,4 +1,4 @@
-import { type JSX, useEffect, useId } from "react";
+import { type JSX, RefObject, useEffect, useId, useRef } from "react";
 import { type CameraDevice, Html5Qrcode } from "html5-qrcode";
 
 interface QRCodeScannerProps {
@@ -11,6 +11,7 @@ function QRCodeScanner({
   onErrorCB,
 }: QRCodeScannerProps): JSX.Element {
   const qrReaderID: string = useId();
+  const lastScanTime: RefObject<number> = useRef(Date.now());
 
   useEffect((): (() => void) => {
     const qrCode = new Html5Qrcode(qrReaderID);
@@ -29,7 +30,13 @@ function QRCodeScanner({
               height: { ideal: 1080 },
             },
           },
-          onSuccessCB,
+          (decodedString: string): void => {
+            // prevent multiple scans in quick succession
+            const currentTime: number = Date.now();
+            if (currentTime - lastScanTime.current < 5000) return;
+            lastScanTime.current = currentTime;
+            onSuccessCB(decodedString);
+          },
           onErrorCB || ((): void => {})
         );
       }
@@ -51,6 +58,7 @@ function QRCodeScanner({
       }
     };
   }, [onErrorCB, onSuccessCB, qrReaderID]);
+
   return (
     <div
       className={`relative h-full max-h-[20rem] aspect-square overflow-hidden rounded-4xl`}>

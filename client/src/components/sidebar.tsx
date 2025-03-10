@@ -87,7 +87,7 @@ function Sidebar(): JSX.Element {
       {loggedIn && (
         <Form method={"POST"} action={"/logout"}>
           <button
-            className={`flex items-center gap-2 px-3 rounded-lg py-2 ${
+            className={`flex items-center cursor-pointer gap-2 px-3 rounded-lg py-2 ${
               isOpen || "hidden"
             }`}>
             <LogOut size={18} />
