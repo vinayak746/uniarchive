@@ -1,8 +1,8 @@
 import { toast } from "react-toastify";
 import server from "../../utils/axios.util";
-import { type LoaderFunction, redirect } from "react-router-dom";
+import { type ActionFunction, redirect } from "react-router-dom";
 
-const LogoutLoader: LoaderFunction = (): Promise<Response> => {
+const LogoutAction: ActionFunction = (): Promise<Response> => {
   return new Promise<Response>((resolve: (value: Response) => void): void => {
     server
       .post("/api/user/auth/logout")
@@ -14,4 +14,4 @@ const LogoutLoader: LoaderFunction = (): Promise<Response> => {
   });
 };
 
-export default LogoutLoader;
+export default LogoutAction;

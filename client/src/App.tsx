@@ -7,7 +7,7 @@ import NotFoundPage from "./pages/notfound.page";
 import LoginAction from "./pages/login/login.action";
 import LoginLoader from "./pages/login/login.loader";
 import SystemLayout from "./pages/system/system.page";
-import LogoutLoader from "./pages/logout/logout.loader";
+import LogoutAction from "./pages/logout/logout.loader";
 import LoadingSpinner from "./components/loadingspinner";
 import RegisterPage from "./pages/register/register.page";
 import RootLayoutLoader from "./pages/layout/layout.loader";
@@ -33,8 +33,7 @@ const router = createBrowserRouter([
     element: <RegisterPage />,
   },
   {
-    loader: LogoutLoader,
-    hydrateFallbackElement: <LoadingSpinner />,
+    action: LogoutAction,
     path: "/logout",
   },
   {

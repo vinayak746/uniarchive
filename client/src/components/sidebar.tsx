@@ -8,7 +8,7 @@ import {
   FileText,
 } from "lucide-react";
 import {
-  Link,
+  Form,
   NavLink,
   useRouteLoaderData,
   type NavLinkRenderProps,
@@ -24,6 +24,7 @@ function Sidebar(): JSX.Element {
 
   return (
     <div className={`flex flex-col justify-between pb-2 gap-4`}>
+      {/* {loggedIn + ""} */}
       <div className={`flex flex-col gap-4`}>
         <button
           title={isOpen ? "Close Sidebar" : "Open Sidebar"}
@@ -84,14 +85,15 @@ function Sidebar(): JSX.Element {
         </ul>
       </div>
       {loggedIn && (
-        <Link
-          className={`flex items-center gap-2 px-3 rounded-lg py-2 ${
-            isOpen || "hidden"
-          }`}
-          to={`/logout`}>
-          <LogOut size={18} />
-          Logout
-        </Link>
+        <Form method={"POST"} action={"/logout"}>
+          <button
+            className={`flex items-center gap-2 px-3 rounded-lg py-2 ${
+              isOpen || "hidden"
+            }`}>
+            <LogOut size={18} />
+            Logout
+          </button>
+        </Form>
       )}
     </div>
   );

@@ -25,13 +25,12 @@ function QRCodeScanner({
             videoConstraints: {
               facingMode: "environment",
               aspectRatio: { exact: 1 },
-              // h-full and w-full
               width: { ideal: 1080 },
               height: { ideal: 1080 },
             },
           },
           onSuccessCB,
-          onErrorCB ? onErrorCB : (): void => {}
+          onErrorCB || ((): void => {})
         );
       }
     });

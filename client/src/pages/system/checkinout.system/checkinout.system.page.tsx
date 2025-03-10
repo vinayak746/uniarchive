@@ -23,7 +23,6 @@ function CheckInOutSystemPage(): JSX.Element {
         <h1 className={`text-3xl font-bold`}>Check In/Out System</h1>
         <p className={`text-lg`}>Scan the QR code to check in or out</p>
       </div>
-      {code}
       <QRCode bgColor={"#f9f3ee"} className={`w-full`} value={code} />
     </div>
   );
