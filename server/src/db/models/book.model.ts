@@ -12,8 +12,8 @@ export interface BookInterface extends Document {
   isbn: string;
   copies: number;
   title: string;
-  author: string;
-  genre: BookGenre[];
+  authors: string[];
+  genres: BookGenre[];
   pages: number;
   summary: string;
   coverImageUrl: string;
@@ -21,27 +21,56 @@ export interface BookInterface extends Document {
 }
 
 const BookSchema = new Schema<BookInterface>({
-  isbn: { type: String, required: true, unique: true },
+  isbn: {
+    type: String,
+    index: true,
+    required: true,
+    unique: true,
+    minlength: 10,
+    maxlength: 13,
+  },
   copies: {
     type: Number,
     required: true,
     default: 1,
   },
-  title: { type: String, required: true },
-  author: { type: String, required: true },
+  title: { type: String, required: true, index: true },
+  authors: {
+    type: [{ type: String, required: true }],
+    validate: [
+      (authors: string[]): boolean => !!authors.length,
+      "At least one author is required",
+    ],
+    index: true,
+  },
   coverImageUrl: { type: String, required: true },
-  genre: [
-    {
-      type: String,
-      enum: Object.values(BookGenre),
-      required: true,
-    },
-  ],
+  genres: {
+    type: [
+      {
+        type: String,
+        enum: Object.values(BookGenre),
+        required: true,
+      },
+    ],
+    index: true,
+    validate: [
+      (genres: BookGenre[]): boolean => !!genres.length,
+      "At least one genre is required",
+    ],
+  },
   pages: { type: Number, required: true },
-  rating: { type: Number, required: true, default: 0 },
+  rating: { type: Number, required: true, default: 0, max: 5 },
   summary: { type: String, required: false, default: "" },
 });
 
+BookSchema.pre("save", function (next) {
+  const book: BookInterface = this;
+  book.isbn = book.isbn.replaceAll("-", "");
+  book.coverImageUrl =
+    book.coverImageUrl ||
+    `https://covers.openlibrary.org/b/isbn/${book.isbn}-L.jpg`;
+  next();
+});
 const Book: Model<BookInterface> = model<BookInterface>("Book", BookSchema);
 
 export default Book;

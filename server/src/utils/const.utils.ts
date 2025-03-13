@@ -24,13 +24,14 @@ try {
 }
 export const QR_ROLL_TIME_S: number = QR_ROLL_TIME_S_Temp;
 
-logger.info({
-  env: {
-    PORT,
-    MONGO_URI,
-    JWT_SECRET,
-    CLIENT_URL,
-    IS_DEV,
-    QR_ROLL_TIME_S,
-  },
-});
+!IS_DEV &&
+  logger.info({
+    env: {
+      PORT,
+      MONGO_URI,
+      JWT_SECRET,
+      CLIENT_URL,
+      IS_DEV,
+      QR_ROLL_TIME_S,
+    },
+  });

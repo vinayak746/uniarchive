@@ -36,7 +36,7 @@ const BookIssueSchema: Schema<BookIssue> = new Schema<BookIssue>({
 BookIssueSchema.pre(
   "save",
   function (next: CallbackWithoutResultAndOptionalError): void {
-    const issue = this as BookIssue;
+    const issue: BookIssue = this;
     const userId: ObjectId = issue.user;
     User.findById(userId).then((user: UserInterface | null): void => {
       if (user) {

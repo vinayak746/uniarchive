@@ -10,7 +10,7 @@ export const bookISBNSchema: ZodString = z
   .min(10, {
     message: "ISBN must be at least 10 characters",
   })
-  .max(17, {
+  .max(13, {
     message: "ISBN must be at most 13 characters",
   });
 

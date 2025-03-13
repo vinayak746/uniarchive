@@ -10,7 +10,7 @@
   "scripts": {
     "start": "node dist/index.js",
     "dev": "nodemon src/index.ts | pino-pretty",
-    "start:script": "tsc && node dist/script.js | pino-pretty",
+    "start:script": "nodemon src/script.ts | pino-pretty",
     "build": "tsc"
   },
   "dependencies": {

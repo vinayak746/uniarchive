@@ -32,6 +32,7 @@ const UserSchema = new Schema<UserInterface>({
     type: String,
     required: true,
     unique: true,
+    index: true,
   },
   role: {
     type: String,

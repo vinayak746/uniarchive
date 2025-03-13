@@ -14,43 +14,60 @@ import {
 import Book, { BookGenre, BookInterface } from "../../db/models/book.model";
 import { ResponseType } from "../../utils/response.util";
 import errorsFromZodIssue from "../../utils/validation.util/error.validation.util";
+import { fetchBookData } from "../../utils/fetchdata.util/book.fetchdata.util";
+import { Document } from "mongoose";
+import logger from "../../utils/logger.util/index.logger.util";
 
 const bookAddSchema: z.ZodObject<{
   isbn: z.ZodString;
-  copies: z.ZodNumber;
-  title: z.ZodString;
-  author: z.ZodString;
-  genre: z.ZodArray<z.ZodNativeEnum<typeof BookGenre>, "many">;
-  pages: z.ZodNumber;
-  summary: z.ZodString;
-  coverImageUrl: z.ZodString;
-  rating: z.ZodNumber;
 }> = z.object({
   isbn: bookISBNSchema,
-  copies: bookCopiesSchema,
-  title: bookTitleSchema,
-  author: bookAuthorSchema,
-  genre: bookGenreSchema,
-  pages: bookPagesSchema,
-  summary: bookSummarySchema,
-  coverImageUrl: bookCoverImageUrlSchema,
-  rating: bookRatingSchema,
 });
 
 export default function addBookRoute(
-  req: Request,
-  res: Response<ResponseType>
+  req: Request<{
+    isbn: string;
+  }>,
+  res: Response<
+    ResponseType<{
+      title: string;
+    }>
+  >
 ): void {
   const { success, data, error } = bookAddSchema.safeParse(req.body);
   if (!success) {
+    logger.info({ body: req.body });
     res.json({ success: false, errors: errorsFromZodIssue(error) });
     return;
   }
-  const book = new Book(data);
-  book
-    .save()
-    .then((): void => {
-      res.json({ success: true });
+  const { isbn } = data;
+  fetchBookData(isbn)
+    .then((bookData: Omit<BookInterface, keyof Document>): void => {
+      Book.findOne({
+        isbn: bookData.isbn,
+      }).then((book: BookInterface | null): void => {
+        if (book) {
+          res.json({
+            success: false,
+            errors: ["Book already exists"],
+          });
+          return;
+        }
+        const newBook = new Book(bookData);
+        newBook
+          .save()
+          .then((): void => {
+            res.json({
+              success: true,
+              data: {
+                title: bookData.title,
+              },
+            });
+          })
+          .catch((err: Error): void => {
+            res.json({ success: false, errors: [err.message] });
+          });
+      });
     })
     .catch((err: Error): void => {
       res.json({ success: false, errors: [err.message] });
