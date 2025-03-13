@@ -1,18 +1,22 @@
 import { JSX } from "react";
 import Form from "../../../../components/form.component";
 import Input from "../../../../components/input.component";
-import TextArea from "../../../../components/textarea.component";
-import FileInput from "../../../../components/fileinput.component";
 import Button from "../../../../components/button.component";
 
 function AddBookPage(): JSX.Element {
   return (
     <div className={`flex grow justify-center items-center`}>
-      <Form title="Add Book">
+      <Form method={"POST"} title="Add Book">
         <div className={`flex flex-col sm:flex-row gap-4 sm:gap-8`}>
           <div className={`flex flex-col gap-4`}>
-            <Input min={10} max={13} labelText={"ISBN"} placeholder={"ISBN"} />
             <Input
+              name={"isbn"}
+              min={10}
+              max={13}
+              labelText={"ISBN"}
+              placeholder={"ISBN"}
+            />
+            {/* <Input
               min={1}
               max={100}
               labelText={"Title"}
@@ -30,8 +34,9 @@ function AddBookPage(): JSX.Element {
               labelText={"Pages"}
               placeholder={"Pages"}
               type={"number"}
-            />
+            />*/}
           </div>
+          {/* 
           <div className={`flex flex-col gap-4`}>
             <Input
               min={1}
@@ -48,7 +53,7 @@ function AddBookPage(): JSX.Element {
               type={"file"}
             />
             <Input labelText={"Copies"} placeholder={"Copies Available"} />
-          </div>
+          </div> */}
         </div>
         <Button>
           <div>Add Book</div>

@@ -18,6 +18,7 @@ import CheckInOutLoader from "./pages/checkin_out.page/checkin_out.loader";
 import CheckInOutSystemPage from "./pages/system.page/checkinout.system.page/checkinout.system.page";
 import AddBookPage from "./pages/system.page/book.system.page/add.book.system.page/add.book.system.page";
 import BookSystemPage from "./pages/system.page/book.system.page/book.system.page";
+import addBookAction from "./pages/system.page/book.system.page/add.book.system.page/add.book.system.action";
 
 let routes: RouteObject[] = [];
 routes = [
@@ -54,6 +55,7 @@ routes = [
             element: <BookSystemPage />,
           },
           {
+            action: addBookAction,
             path: "add",
             element: <AddBookPage />,
           },
