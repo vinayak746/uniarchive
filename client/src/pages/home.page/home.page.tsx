@@ -1,7 +1,7 @@
 import { type JSX } from "react";
 import { Link } from "react-router-dom";
 import { DoorOpen } from "lucide-react";
-import BookCard from "../../components/bookcard";
+import BookCard from "../../components/bookcard.component";
 
 function HomePage(): JSX.Element {
   return (

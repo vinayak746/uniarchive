@@ -1,6 +1,6 @@
 import { type JSX } from "react";
-import Navbar from "../../components/navbar";
-import Sidebar from "../../components/sidebar";
+import Navbar from "../navbar.component";
+import Sidebar from "../sidebar.component";
 import { Outlet } from "react-router-dom";
 
 function Layout(): JSX.Element {

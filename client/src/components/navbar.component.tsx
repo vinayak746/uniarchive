@@ -15,7 +15,9 @@ import {
   type NavLinkRenderProps,
 } from "react-router-dom";
 import { type HTMLAttributes, type JSX } from "react";
-import RootLayoutLoader, { SessionData } from "../pages/layout/layout.loader";
+import RootLayoutLoader, {
+  SessionData,
+} from "./layout.component/layout.loader";
 
 interface NavbarProps extends HTMLAttributes<HTMLDivElement> {
   onlyMain?: boolean;

@@ -1,5 +1,7 @@
 # FEATURES
 
+### Rules & Regulations
+
 ### Books Archive
 
 > Browse through books and filter by genre, author, title and/or other basis.

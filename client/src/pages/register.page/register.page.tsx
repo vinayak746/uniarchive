@@ -1,18 +1,18 @@
 import { type JSX } from "react";
 import { LogIn } from "lucide-react";
 import { Link } from "react-router-dom";
-import Form from "../../components/form";
-import Input from "../../components/input";
-import Navbar from "../../components/navbar";
-import Button from "../../components/button";
-import Select from "../../components/select";
+import Form from "../../components/form.component";
+import Input from "../../components/input.component";
+import Navbar from "../../components/navbar.component";
+import Button from "../../components/button.component";
+import Select from "../../components/select.component";
 
 function RegisterPage(): JSX.Element {
   return (
     <div className={`flex flex-col grow`}>
       <Navbar onlyMain />
       <div className={`flex justify-center items-center grow`}>
-        <Form formHeading={"Register"} method="post">
+        <Form title={"Register"} method="post">
           <Input
             autoFocus
             name={"name"}

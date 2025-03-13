@@ -1,17 +1,17 @@
 import { type JSX } from "react";
 import { LogIn } from "lucide-react";
 import { Link } from "react-router-dom";
-import Form from "../../components/form";
-import Input from "../../components/input";
-import Navbar from "../../components/navbar";
-import Button from "../../components/button";
+import Form from "../../components/form.component";
+import Input from "../../components/input.component";
+import Navbar from "../../components/navbar.component";
+import Button from "../../components/button.component";
 
 function LoginPage(): JSX.Element {
   return (
     <div className={`flex flex-col grow`}>
       <Navbar onlyMain />
       <div className={`flex justify-center items-center grow`}>
-        <Form formHeading={"Login"} method="post">
+        <Form title={"Login"} method="post">
           <Input
             autoFocus
             name={"uid"}

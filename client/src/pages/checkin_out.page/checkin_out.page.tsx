@@ -2,11 +2,11 @@ import { toast } from "react-toastify";
 import { ScanQrCode } from "lucide-react";
 import { type AxiosResponse } from "axios";
 import server from "../../utils/axios.util";
-import QRCodeScanner from "../../components/qrscanner";
+import QRCodeScanner from "../../components/qrscanner.component";
 import { type RefObject, useRef, type JSX } from "react";
 import { type ResponseType } from "../../utils/response.util";
-import { useRouteLoaderData } from "react-router-dom";
-import RootLayoutLoader, { SessionData } from "../layout/layout.loader";
+import { SessionData, useRouteLoaderData } from "react-router-dom";
+import RootLayoutLoader from "../../components/layout.component/layout.loader";
 
 function CheckInOutPage(): JSX.Element {
   const session: SessionData = useRouteLoaderData<typeof RootLayoutLoader>(

@@ -1,21 +1,23 @@
-import Layout from "./pages/layout/layout";
-import HomePage from "./pages/home/home.page";
 import { RouteObject } from "react-router-dom";
-import LoginPage from "./pages/login/login.page";
-import NotFoundPage from "./pages/notfound.page";
-import LoginAction from "./pages/login/login.action";
-import LoginLoader from "./pages/login/login.loader";
-import SystemLayout from "./pages/system/system.page";
-import LogoutAction from "./pages/logout/logout.loader";
-import LoadingSpinner from "./components/loadingspinner";
-import RegisterPage from "./pages/register/register.page";
-import RootLayoutLoader from "./pages/layout/layout.loader";
-import RegisterAction from "./pages/register/register.action";
-import RegisterLoader from "./pages/register/register.loader";
-import CheckInOutPage from "./pages/checkin_out/checkin_out.page";
-import CheckInOutLoader from "./pages/checkin_out/checkin_out.loader";
-import CheckInOutSystemPage from "./pages/system/checkinout.system/checkinout.system.page";
-import RoutesView from "./pages/routes_view/routes_view.page";
+import Layout from "./components/layout.component/layout";
+import HomePage from "./pages/home.page/home.page";
+import LoginPage from "./pages/login.page/login.page";
+import SystemLayout from "./pages/system.page/system.page";
+import LogoutAction from "./pages/logout.page/logout.loader";
+import LoadingSpinner from "./components/loadingspinner.component";
+import LoginAction from "./pages/login.page/login.action";
+import LoginLoader from "./pages/login.page/login.loader";
+import RegisterPage from "./pages/register.page/register.page";
+import NotFoundPage from "./pages/notfound.page/notfound.page";
+import RoutesView from "./pages/routes_view.page/routes_view.page";
+import RegisterAction from "./pages/register.page/register.action";
+import RegisterLoader from "./pages/register.page/register.loader";
+import RootLayoutLoader from "./components/layout.component/layout.loader";
+import CheckInOutPage from "./pages/checkin_out.page/checkin_out.page";
+import CheckInOutLoader from "./pages/checkin_out.page/checkin_out.loader";
+import CheckInOutSystemPage from "./pages/system.page/checkinout.system.page/checkinout.system.page";
+import AddBookPage from "./pages/system.page/book.system.page/add.book.system.page/add.book.system.page";
+import BookSystemPage from "./pages/system.page/book.system.page/book.system.page";
 
 let routes: RouteObject[] = [];
 routes = [
@@ -43,6 +45,19 @@ routes = [
       {
         path: "checkin-out",
         element: <CheckInOutSystemPage />,
+      },
+      {
+        path: "book",
+        children: [
+          {
+            index: true,
+            element: <BookSystemPage />,
+          },
+          {
+            path: "add",
+            element: <AddBookPage />,
+          },
+        ],
       },
     ],
   },

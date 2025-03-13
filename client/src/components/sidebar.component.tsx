@@ -10,11 +10,12 @@ import {
 import {
   Form,
   NavLink,
+  SessionData,
   useRouteLoaderData,
   type NavLinkRenderProps,
 } from "react-router-dom";
 import { type JSX, useState } from "react";
-import RootLayoutLoader, { SessionData } from "../pages/layout/layout.loader";
+import RootLayoutLoader from "./layout.component/layout.loader";
 
 function Sidebar(): JSX.Element {
   const [isOpen, setIsOpen] = useState<boolean>(innerWidth > 768);

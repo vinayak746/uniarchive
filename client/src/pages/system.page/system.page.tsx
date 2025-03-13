@@ -1,5 +1,5 @@
 import { type JSX } from "react";
-import Navbar from "../../components/navbar";
+import Navbar from "../../components/navbar.component";
 import { UserCog } from "lucide-react";
 import { Outlet } from "react-router-dom";
 

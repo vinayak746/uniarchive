@@ -5,20 +5,15 @@ import {
 import { type JSX } from "react";
 
 interface FormProps extends RRFormProps {
-  formHeading: string;
+  title: string;
 }
 
-function Form({
-  children,
-  className,
-  formHeading,
-  ...rest
-}: FormProps): JSX.Element {
+function Form({ children, className, title, ...rest }: FormProps): JSX.Element {
   return (
     <RRForm
       className={`flex flex-col justify-center items-center shadow-lg bg-secondary p-8 gap-4 rounded-3xl ${className}`}
       {...rest}>
-      <div className={`font-semibold text-center text-3xl`}>{formHeading}</div>
+      <div className={`font-semibold text-center text-3xl`}>{title}</div>
       {children}
     </RRForm>
   );
