@@ -1,6 +1,6 @@
 import Password, {
   type HashedPassword,
-} from "../../utils/password/index.password.util";
+} from "../../utils/password.util/index.password.util";
 import { type Document, type Model, model, Schema } from "mongoose";
 
 export enum UserRoles {

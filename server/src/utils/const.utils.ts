@@ -1,7 +1,7 @@
 import { ok } from "assert";
 import { config } from "dotenv";
 import { type Secret } from "jsonwebtoken";
-import logger from "./logger/index.logger.util";
+import logger from "./logger.util/index.logger.util";
 
 config();
 

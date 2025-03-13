@@ -1,6 +1,6 @@
 import User, { type UserInterface } from "../db/models/user.model";
 
-export function getUser(uid: string): Promise<UserInterface> {
+export function getUserByUID(uid: string): Promise<UserInterface> {
   return new Promise<UserInterface>(
     (
       resolve: (value: UserInterface) => void,

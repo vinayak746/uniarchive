@@ -11,7 +11,7 @@ import { join } from "path";
 import connectToDB from "./db/index.db";
 import cookieParser from "cookie-parser";
 import ApiRouter from "./routes/index.routes";
-import logger from "./utils/logger/index.logger.util";
+import logger from "./utils/logger.util/index.logger.util";
 import { CLIENT_URL, PORT } from "./utils/const.utils";
 
 const app: Express = express();
@@ -48,6 +48,6 @@ app.use((err: Error, req: Request, res: Response, next: NextFunction): void => {
 
 app.listen(PORT, (): void => {
   console.clear();
-  logger.info(`Server is running on http://0.0.0.0:${PORT}`);
+  logger.info(`Server is running on http://localhost:${PORT}`);
   connectToDB();
 });

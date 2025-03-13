@@ -1,13 +1,13 @@
 import {
   userPasswordSchema,
   userUIDSchema,
-} from "../../../utils/validation/user.validation";
+} from "../../../utils/validation.util/user.validation";
 import { z, type ZodIssue } from "zod";
 import { type Request, type Response } from "express";
-import { getUser } from "../../../controller/user.controller";
+import { getUserByUID } from "../../../controller/user.controller";
 import { type ResponseType } from "../../../utils/response.util";
 import { type UserInterface } from "../../../db/models/user.model";
-import { createSession } from "../../../utils/auth/session.auth.util";
+import { createSession } from "../../../utils/auth.util/session.auth.util";
 
 type UserLoginBody = Pick<UserInterface, "uid"> & {
   password: string;
@@ -39,7 +39,7 @@ export default function UserLoginRoute(
     return;
   }
 
-  getUser(data.uid)
+  getUserByUID(data.uid)
     .then((user: UserInterface): void => {
       user
         .comparePassword(data.password)

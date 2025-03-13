@@ -1,6 +1,6 @@
 import { MONGO_URI } from "../utils/const.utils";
 import { connect, type Mongoose } from "mongoose";
-import logger from "../utils/logger/index.logger.util";
+import logger from "../utils/logger.util/index.logger.util";
 
 export default function connectToDB(): Promise<Mongoose> {
   return new Promise(

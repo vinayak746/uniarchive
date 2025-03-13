@@ -3,7 +3,7 @@ import {
   destroySession,
   getSession,
   type SessionPayload,
-} from "../../../utils/auth/session.auth.util";
+} from "../../../utils/auth.util/session.auth.util";
 import { type Request, type Response } from "express";
 import { type ResponseType } from "../../../utils/response.util";
 import User, { type UserInterface } from "../../../db/models/user.model";

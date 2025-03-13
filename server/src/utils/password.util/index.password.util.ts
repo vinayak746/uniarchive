@@ -1,6 +1,6 @@
 import { ok } from "assert";
 import { pbkdf2, randomBytes } from "crypto";
-import logger from "../logger/index.logger.util";
+import logger from "../logger.util/index.logger.util";
 
 export interface HashedPassword {
   hash: string;

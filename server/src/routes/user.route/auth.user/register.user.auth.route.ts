@@ -7,13 +7,12 @@ import {
   userPasswordSchema,
   userRoleSchema,
   userUIDSchema,
-} from "../../../utils/validation/user.validation";
+} from "../../../utils/validation.util/user.validation";
 import { z, type ZodIssue } from "zod";
-import { signJWT } from "../../../utils/auth/jwt.auth.util";
 import type { NextFunction, Request, Response } from "express";
 import { createUser } from "../../../controller/user.controller";
 import { type ResponseType } from "../../../utils/response.util";
-import { createSession } from "../../../utils/auth/session.auth.util";
+import { createSession } from "../../../utils/auth.util/session.auth.util";
 
 type UserRegisterBody = Pick<UserInterface, "name" | "uid" | "role"> & {
   password: string;

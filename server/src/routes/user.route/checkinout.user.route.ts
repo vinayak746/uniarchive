@@ -1,10 +1,10 @@
 import {
   getSession,
   type SessionPayload,
-} from "../../utils/auth/session.auth.util";
+} from "../../utils/auth.util/session.auth.util";
 import { z, ZodIssue } from "zod";
 import type { Request, Response } from "express";
-import logger from "../../utils/logger/index.logger.util";
+import logger from "../../utils/logger.util/index.logger.util";
 import { type ResponseType } from "../../utils/response.util";
 import User, { type UserInterface } from "../../db/models/user.model";
 import { QR_ROLL_TIME_S } from "../../utils/const.utils";
