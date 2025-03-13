@@ -2,6 +2,7 @@ import { type JSX } from "react";
 import { Link } from "react-router-dom";
 import { DoorOpen } from "lucide-react";
 import BookCard from "../../components/bookcard.component";
+import { BookGenre } from "../../types/books.types.ts";
 
 function HomePage(): JSX.Element {
   return (
@@ -52,18 +53,48 @@ function HomePage(): JSX.Element {
           </Link>
         </div>
         <BookCard
-          src="https://admin.itsnicethat.com/images/XSRykZCRQhGROOBt6Yug8QTbykI=/95588/format-webp%7Cwidth-1440/54e335375c3e3c758b0000f5.jpg"
-          alt={`book cover`}
+          book={{
+            coverImageUrl:
+              "https://admin.itsnicethat.com/images/XSRykZCRQhGROOBt6Yug8QTbykI=/95588/format-webp%7Cwidth-1440/54e335375c3e3c758b0000f5.jpg",
+            title: "Book Title",
+            authors: ["Author 1", "Author 2"],
+            rating: 4,
+            copies: 5,
+            genres: [BookGenre.BUSINESS, BookGenre.DETECTIVE],
+            isbn: "1234567890",
+            pages: 100,
+            summary: "Book Summary",
+          }}
           size="lg"
-        />
+        />{" "}
         <BookCard
-          src="https://admin.itsnicethat.com/images/XSRykZCRQhGROOBt6Yug8QTbykI=/95588/format-webp%7Cwidth-1440/54e335375c3e3c758b0000f5.jpg"
-          alt={`book cover`}
+          book={{
+            coverImageUrl:
+              "https://admin.itsnicethat.com/images/XSRykZCRQhGROOBt6Yug8QTbykI=/95588/format-webp%7Cwidth-1440/54e335375c3e3c758b0000f5.jpg",
+            title: "Book Title",
+            authors: ["Author 1", "Author 2"],
+            rating: 4,
+            copies: 5,
+            genres: [BookGenre.BUSINESS, BookGenre.DETECTIVE],
+            isbn: "1234567890",
+            pages: 100,
+            summary: "Book Summary",
+          }}
           size="md"
-        />
+        />{" "}
         <BookCard
-          src="https://admin.itsnicethat.com/images/XSRykZCRQhGROOBt6Yug8QTbykI=/95588/format-webp%7Cwidth-1440/54e335375c3e3c758b0000f5.jpg"
-          alt={`book cover`}
+          book={{
+            coverImageUrl:
+              "https://admin.itsnicethat.com/images/XSRykZCRQhGROOBt6Yug8QTbykI=/95588/format-webp%7Cwidth-1440/54e335375c3e3c758b0000f5.jpg",
+            title: "Book Title",
+            authors: ["Author 1", "Author 2"],
+            rating: 4,
+            copies: 5,
+            genres: [BookGenre.BUSINESS, BookGenre.DETECTIVE],
+            isbn: "1234567890",
+            pages: 100,
+            summary: "Book Summary",
+          }}
           size="sm"
         />
       </div>

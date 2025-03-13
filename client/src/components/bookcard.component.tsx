@@ -1,21 +1,70 @@
-import { type ImgHTMLAttributes, type JSX } from "react";
+import { type HTMLAttributes, type JSX } from "react";
+import { BookInterface } from "../types/books.types";
+import { Star } from "lucide-react";
 
-interface BookCardProps extends ImgHTMLAttributes<HTMLImageElement> {
-  size?: "sm" | "md" | "lg";
+interface BookCardProps extends HTMLAttributes<HTMLDivElement> {
+  size?: "sm" | "md" | "lg" | "custom";
+  book: BookInterface;
 }
 
 function BookCard({
   size = "sm",
+  book,
   className,
   ...rest
 }: BookCardProps): JSX.Element {
   return (
-    <img
+    <div
       {...rest}
-      className={`h-60 ${
-        size == "sm" ? "sm:h-62" : size === "md" ? "sm:h-72" : "sm:h-82"
-      } aspect-[3/4] temp object-cover rounded-lg  z-10 ${className}`}
-    />
+      title={book.summary}
+      className={`w-32 ${
+        size == "sm"
+          ? "sm:w-32"
+          : size === "md"
+          ? "sm:w-48"
+          : size === "lg" && "sm:w-64"
+      } flex flex-col justify-between object-cover rounded-lg ${className}`}>
+      <div className={`flex flex-col gap-2`}>
+        <img
+          src={book.coverImageUrl}
+          alt={book.title}
+          className="w-full aspect-[3/4] object-cover rounded-lg"
+        />
+        <div>
+          <div
+            className={`w-full text-ellipsis font-semibold text-dark/80 ${
+              size === "sm" ? "text-sm" : size === "md" ? "text-lg" : "text-2xl"
+            } ${size === "lg" && "line-clamp-2"}
+              
+              }`}
+            title={book.title}>
+            {book.title}
+          </div>
+          <div className={`text-xs text-dark/80`}>
+            {/* show atmost two authors */}
+            {book.authors.slice(0, 2).join(", ")}
+            {book.authors.length > 2 && " et al."}
+          </div>
+        </div>
+      </div>
+      <div title={`${book.rating} rating`} className={`flex gap-1`}>
+        {Array(5)
+          .fill(0)
+          .map(
+            (_: number, i: number): JSX.Element => (
+              <Star
+                key={i}
+                size={14}
+                className={`${
+                  i < Math.round(book.rating)
+                    ? "fill-yellow-400 text-yellow-400"
+                    : "text-gray-300"
+                }`}
+              />
+            )
+          )}
+      </div>
+    </div>
   );
 }
 

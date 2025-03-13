@@ -20,7 +20,7 @@ function RoutesView({
           <div className={`flex justify-center items-center gap-4`}>
             <h1 className={`text-2xl`}>Pages</h1>
           </div>
-          <div className={`flex justify-end items-center px-8 sm:px-16 gap-8`}>
+          <div className={`flex justify-end items-center px-8 sm:px-16 gap-4`}>
             <div className={`flex gap-2`}>
               <div
                 className={`h-6 aspect-square bg-blue-400 w-fit border border-dark`}
@@ -37,7 +37,7 @@ function RoutesView({
         </>
       )}
       <div className={`flex flex-col justify-center items-center`}>
-        <div className={`border-l flex flex-col gap-2 divide-y`}>
+        <div className={`border-l flex flex-col`}>
           {routes.map((route: RouteObject): JSX.Element => {
             route.path = route.path || "/";
             return (
@@ -53,7 +53,7 @@ function RoutesView({
                       : parentPath + "/" + route.path
                   }>
                   {route.path}
-                  {route.id && ` - ${route.id}`}
+                  {route.id && ` ~ ${route.id}`}
                   <div className={`flex justify-center items-center`}>
                     {
                       <div

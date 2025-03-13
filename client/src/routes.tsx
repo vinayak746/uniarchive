@@ -19,6 +19,7 @@ import CheckInOutSystemPage from "./pages/system.page/checkinout.system.page/che
 import AddBookPage from "./pages/system.page/book.system.page/add.book.system.page/add.book.system.page";
 import BookSystemPage from "./pages/system.page/book.system.page/book.system.page";
 import addBookAction from "./pages/system.page/book.system.page/add.book.system.page/add.book.system.action";
+import bookSystemLoader from "./pages/system.page/book.system.page/book.system.loader";
 
 let routes: RouteObject[] = [];
 routes = [
@@ -52,6 +53,7 @@ routes = [
         children: [
           {
             index: true,
+            loader: bookSystemLoader,
             element: <BookSystemPage />,
           },
           {
