@@ -4,4 +4,5 @@ yarn.lock
 .env*
 !.env.example
 *.log
-src/script.ts
+/src/script.ts
+/src/sampledata
