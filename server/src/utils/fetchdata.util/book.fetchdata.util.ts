@@ -126,6 +126,9 @@ export function fetchBookData(
                                     coverImageUrl,
                                     rating,
                                   };
+                                  logger.info(
+                                    `Book ${bookInfo.title} fetched successfully`
+                                  );
                                   resolve(bookInfo);
                                 }
                               )

@@ -1,8 +1,8 @@
-import { ActionFunction, ActionFunctionArgs } from "react-router-dom";
-import { ResponseType } from "../../../../utils/response.util";
-import server from "../../../../utils/axios.util";
-import { AxiosResponse } from "axios";
 import { toast } from "react-toastify";
+import { type AxiosResponse } from "axios";
+import server from "../../../../utils/axios.util";
+import { type ResponseType } from "../../../../utils/response.util";
+import { type ActionFunction, type ActionFunctionArgs } from "react-router-dom";
 
 const addBookAction: ActionFunction = ({
   request,
@@ -10,6 +10,7 @@ const addBookAction: ActionFunction = ({
   return new Promise((resolve: (value: void | Response) => void): void => {
     request.formData().then((formData: FormData): void => {
       const isbn = formData.get("isbn") as string;
+      console.table({ isbn });
       server
         .post("/api/book/add", {
           isbn,
