@@ -24,6 +24,7 @@ import BookCategoryPage from "./pages/books.page/index.books.page";
 import bookCategoryLoader from "./pages/books.page/index.books.loader";
 import bookSearchAction from "./components/navbar.comoponent/navbar.component.action";
 import BookByISBNPage from "./pages/books.page/isbn.books.page/isbn.books.page";
+import ISBNBookLoader from "./pages/books.page/isbn.books.page/isbn.books.loader";
 
 let routes: RouteObject[] = [];
 routes = [
@@ -103,6 +104,7 @@ routes = [
             element: <BookCategoryPage />,
           },
           {
+            loader: ISBNBookLoader,
             path: "isbn/:isbn",
             element: <BookByISBNPage />,
           },
