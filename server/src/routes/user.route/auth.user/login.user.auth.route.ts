@@ -13,15 +13,10 @@ type UserLoginBody = Pick<UserInterface, "uid"> & {
   password: string;
 };
 
-const userLoginSchema: z.ZodObject<
-  {
-    uid: z.ZodString;
-    password: z.ZodString;
-  },
-  "strip",
-  z.ZodTypeAny,
-  UserLoginBody
-> = z.object({
+const userLoginSchema: z.ZodObject<{
+  uid: z.ZodString;
+  password: z.ZodString;
+}> = z.object({
   uid: userUIDSchema,
   password: userPasswordSchema,
 });

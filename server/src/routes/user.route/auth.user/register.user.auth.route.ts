@@ -18,17 +18,12 @@ type UserRegisterBody = Pick<UserInterface, "name" | "uid" | "role"> & {
   password: string;
 };
 
-const userRegisterSchema: z.ZodObject<
-  {
-    name: z.ZodString;
-    uid: z.ZodString;
-    password: z.ZodString;
-    role: z.ZodNativeEnum<typeof UserRoles>;
-  },
-  "strip",
-  z.ZodTypeAny,
-  UserRegisterBody
-> = z.object({
+const userRegisterSchema: z.ZodObject<{
+  name: z.ZodString;
+  uid: z.ZodString;
+  password: z.ZodString;
+  role: z.ZodNativeEnum<typeof UserRoles>;
+}> = z.object({
   name: userNameSchema,
   uid: userUIDSchema,
   password: userPasswordSchema,

@@ -6,7 +6,13 @@ import errorsFromZodIssue from "../../utils/validation.util/error.validation.uti
 import { Document } from "mongoose";
 import logger from "../../utils/logger.util/index.logger.util";
 
-const findTitleBooksSchema = z.object({
+const findTitleBooksSchema: z.ZodObject<{
+  filter: z.ZodOptional<
+    z.ZodObject<{
+      title: z.ZodOptional<z.ZodString>;
+    }>
+  >;
+}> = z.object({
   filter: z
     .object({
       title: z.string().optional(),
@@ -14,7 +20,7 @@ const findTitleBooksSchema = z.object({
     .optional(),
 });
 
-export default function findtitleBooksRoute(
+export default function findTitleBooksRoute(
   req: Request,
   res: Response<
     ResponseType<{
@@ -28,10 +34,11 @@ export default function findtitleBooksRoute(
     res.json({ success: false, errors: errorsFromZodIssue(error) });
     return;
   }
+
   Book.find(
     data.filter
       ? {
-          title: { $regex: new RegExp(filter.title, "i") },
+          title: { $regex: new RegExp(data.filter.title || "", "i") },
         }
       : {}
   )
