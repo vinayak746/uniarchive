@@ -47,7 +47,6 @@ export default function CheckInOutUserRoute(
     return;
   }
   const now: number = Date.now() / (QR_ROLL_TIME_S * 1000);
-  logger.info({ now, qrCodeTime });
   if (Math.abs(now - qrCodeTime) > 1) {
     res.status(200).json({
       success: false,

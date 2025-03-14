@@ -1,17 +1,7 @@
 import { Request, Response } from "express";
 import { z } from "zod";
-import {
-  bookAuthorSchema,
-  bookCopiesSchema,
-  bookCoverImageUrlSchema,
-  bookGenreSchema,
-  bookISBNSchema,
-  bookPagesSchema,
-  bookRatingSchema,
-  bookSummarySchema,
-  bookTitleSchema,
-} from "../../utils/validation.util/book.validation";
-import Book, { BookGenre, BookInterface } from "../../db/models/book.model";
+import { bookISBNSchema } from "../../utils/validation.util/book.validation";
+import Book, { BookInterface } from "../../db/models/book.model";
 import { ResponseType } from "../../utils/response.util";
 import errorsFromZodIssue from "../../utils/validation.util/error.validation.util";
 import { fetchBookData } from "../../utils/fetchdata.util/book.fetchdata.util";
@@ -40,19 +30,19 @@ export default function addBookRoute(
     return;
   }
   const { isbn } = data;
-  fetchBookData(isbn)
-    .then((bookData: Omit<BookInterface, keyof Document>): void => {
-      Book.findOne({
-        isbn: bookData.isbn,
-      })
-        .then((book: BookInterface | null): void => {
-          if (book) {
-            res.json({
-              success: false,
-              errors: ["Book already exists"],
-            });
-            return;
-          }
+  Book.findOne({
+    isbn: isbn,
+  })
+    .then((book: BookInterface | null): void => {
+      if (book) {
+        res.json({
+          success: false,
+          errors: ["Book already exists"],
+        });
+        return;
+      }
+      fetchBookData(isbn)
+        .then((bookData: Omit<BookInterface, keyof Document>): void => {
           const newBook = new Book(bookData);
           newBook
             .save()
@@ -73,6 +63,7 @@ export default function addBookRoute(
         });
     })
     .catch((err: Error): void => {
+      logger.error(err.message);
       res.json({ success: false, errors: [err.message] });
     });
 }
