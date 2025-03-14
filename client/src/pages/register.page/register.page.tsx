@@ -3,7 +3,7 @@ import { LogIn } from "lucide-react";
 import { Link } from "react-router-dom";
 import Form from "../../components/form.component";
 import Input from "../../components/input.component";
-import Navbar from "../../components/navbar.component";
+import Navbar from "../../components/navbar.comoponent/navbar.component";
 import Button from "../../components/button.component";
 import Select from "../../components/select.component";
 

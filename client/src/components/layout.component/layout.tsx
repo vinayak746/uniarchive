@@ -1,5 +1,5 @@
 import { type JSX } from "react";
-import Navbar from "../navbar.component";
+import Navbar from "../navbar.comoponent/navbar.component";
 import Sidebar from "../sidebar.component";
 import { Outlet } from "react-router-dom";
 

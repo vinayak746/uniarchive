@@ -19,7 +19,7 @@ const bookSystemLoader: LoaderFunction = () => {
       reject: (reason?: unknown) => void
     ): void => {
       server
-        .post("api/book/find")
+        .post("api/book/title")
         .then(
           ({
             data,

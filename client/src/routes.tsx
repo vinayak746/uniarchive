@@ -20,8 +20,10 @@ import AddBookPage from "./pages/system.page/book.system.page/add.book.system.pa
 import BookSystemPage from "./pages/system.page/book.system.page/index.book.system.page";
 import addBookAction from "./pages/system.page/book.system.page/add.book.system.page/add.book.system.action";
 import bookSystemLoader from "./pages/system.page/book.system.page/index.book.system.loader";
-import BookCategoryPage from "./pages/category.page/index.category.page";
-import bookCategoryLoader from "./pages/category.page/index.category.loader";
+import BookCategoryPage from "./pages/books.page/index.books.page";
+import bookCategoryLoader from "./pages/books.page/index.books.loader";
+import bookSearchAction from "./components/navbar.comoponent/navbar.component.action";
+import BookByISBNPage from "./pages/books.page/isbn.books.page/isbn.books.page";
 
 let routes: RouteObject[] = [];
 routes = [
@@ -76,6 +78,10 @@ routes = [
         element: <HomePage />,
       },
       {
+        path: "booksearch",
+        action: bookSearchAction,
+      },
+      {
         loader: CheckInOutLoader,
         path: "/checkin-out",
         element: <CheckInOutPage />,
@@ -85,13 +91,20 @@ routes = [
         element: <NotFoundPage />,
       },
       {
-        path: "category",
+        path: "books",
         id: "all-books",
-        element: <BookCategoryPage />,
         children: [
           {
-            path: ":filter",
             element: <BookCategoryPage />,
+            index: true,
+          },
+          {
+            path: "genre/:genre",
+            element: <BookCategoryPage />,
+          },
+          {
+            path: "isbn/:isbn",
+            element: <BookByISBNPage />,
           },
         ],
         loader: bookCategoryLoader,
