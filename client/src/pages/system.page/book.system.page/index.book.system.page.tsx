@@ -1,6 +1,6 @@
 import { JSX } from "react";
 import { useLoaderData } from "react-router-dom";
-import bookSystemLoader from "./book.system.loader";
+import bookSystemLoader from "./index.book.system.loader";
 import { BookInterface } from "../../../types/books.types";
 import BookCard from "../../../components/bookcard.component";
 

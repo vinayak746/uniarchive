@@ -2,7 +2,7 @@ import { RouteObject } from "react-router-dom";
 import Layout from "./components/layout.component/layout";
 import HomePage from "./pages/home.page/home.page";
 import LoginPage from "./pages/login.page/login.page";
-import SystemLayout from "./pages/system.page/system.page";
+import SystemLayout from "./pages/system.page/index.system.page";
 import LogoutAction from "./pages/logout.page/logout.loader";
 import LoadingSpinner from "./components/loadingspinner.component";
 import LoginAction from "./pages/login.page/login.action";
@@ -17,9 +17,11 @@ import CheckInOutPage from "./pages/checkin_out.page/checkin_out.page";
 import CheckInOutLoader from "./pages/checkin_out.page/checkin_out.loader";
 import CheckInOutSystemPage from "./pages/system.page/checkinout.system.page/checkinout.system.page";
 import AddBookPage from "./pages/system.page/book.system.page/add.book.system.page/add.book.system.page";
-import BookSystemPage from "./pages/system.page/book.system.page/book.system.page";
+import BookSystemPage from "./pages/system.page/book.system.page/index.book.system.page";
 import addBookAction from "./pages/system.page/book.system.page/add.book.system.page/add.book.system.action";
-import bookSystemLoader from "./pages/system.page/book.system.page/book.system.loader";
+import bookSystemLoader from "./pages/system.page/book.system.page/index.book.system.loader";
+import BookCategoryPage from "./pages/category.page/index.category.page";
+import bookCategoryLoader from "./pages/category.page/index.category.loader";
 
 let routes: RouteObject[] = [];
 routes = [
@@ -70,6 +72,7 @@ routes = [
     children: [
       {
         path: "/",
+        index: true,
         element: <HomePage />,
       },
       {
@@ -80,6 +83,18 @@ routes = [
       {
         path: "/*",
         element: <NotFoundPage />,
+      },
+      {
+        path: "category",
+        id: "all-books",
+        element: <BookCategoryPage />,
+        children: [
+          {
+            path: ":filter",
+            element: <BookCategoryPage />,
+          },
+        ],
+        loader: bookCategoryLoader,
       },
     ],
     id: "layout",
