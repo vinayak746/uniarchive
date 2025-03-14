@@ -38,13 +38,15 @@ BookIssueSchema.pre(
   function (next: CallbackWithoutResultAndOptionalError): void {
     const issue: BookIssue = this;
     const userId: ObjectId = issue.user;
-    User.findById(userId).then((user: UserInterface | null): void => {
-      if (user) {
-        issue.dueDate.setDate(
-          issue.issueDate.getDate() + getLoanPeriod(user.role)
-        );
-      }
-    });
+    User.findById(userId)
+      .then((user: UserInterface | null): void => {
+        if (user) {
+          issue.dueDate.setDate(
+            issue.issueDate.getDate() + getLoanPeriod(user.role)
+          );
+        }
+      })
+      .catch(next);
     next();
   }
 );

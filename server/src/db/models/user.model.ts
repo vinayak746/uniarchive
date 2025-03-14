@@ -1,7 +1,13 @@
 import Password, {
   type HashedPassword,
 } from "../../utils/password.util/index.password.util";
-import { type Document, type Model, model, Schema } from "mongoose";
+import {
+  CallbackWithoutResultAndOptionalError,
+  type Document,
+  type Model,
+  model,
+  Schema,
+} from "mongoose";
 
 export enum UserRoles {
   UGSTUDENT = "UGSTUDENT",
@@ -56,6 +62,14 @@ const UserSchema = new Schema<UserInterface>({
     },
   },
 });
+
+UserSchema.pre(
+  "save",
+  function (next: CallbackWithoutResultAndOptionalError): void {
+    this.uid = this.uid.toUpperCase();
+    next();
+  }
+);
 
 UserSchema.methods.hashPassword = function (password: string): Promise<{
   hash: string;

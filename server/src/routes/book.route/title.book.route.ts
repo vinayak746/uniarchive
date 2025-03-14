@@ -28,7 +28,6 @@ export default function findtitleBooksRoute(
     res.json({ success: false, errors: errorsFromZodIssue(error) });
     return;
   }
-  logger.info({ filter });
   Book.find(
     data.filter
       ? {

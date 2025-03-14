@@ -36,7 +36,6 @@ export default function addBookRoute(
 ): void {
   const { success, data, error } = bookAddSchema.safeParse(req.body);
   if (!success) {
-    logger.info({ body: req.body });
     res.json({ success: false, errors: errorsFromZodIssue(error) });
     return;
   }
@@ -45,29 +44,33 @@ export default function addBookRoute(
     .then((bookData: Omit<BookInterface, keyof Document>): void => {
       Book.findOne({
         isbn: bookData.isbn,
-      }).then((book: BookInterface | null): void => {
-        if (book) {
-          res.json({
-            success: false,
-            errors: ["Book already exists"],
-          });
-          return;
-        }
-        const newBook = new Book(bookData);
-        newBook
-          .save()
-          .then((): void => {
+      })
+        .then((book: BookInterface | null): void => {
+          if (book) {
             res.json({
-              success: true,
-              data: {
-                title: bookData.title,
-              },
+              success: false,
+              errors: ["Book already exists"],
             });
-          })
-          .catch((err: Error): void => {
-            res.json({ success: false, errors: [err.message] });
-          });
-      });
+            return;
+          }
+          const newBook = new Book(bookData);
+          newBook
+            .save()
+            .then((): void => {
+              res.json({
+                success: true,
+                data: {
+                  title: bookData.title,
+                },
+              });
+            })
+            .catch((err: Error): void => {
+              res.json({ success: false, errors: ["Cannot save user"] });
+            });
+        })
+        .catch((err: Error): void => {
+          res.json({ success: false, errors: ["Cannot find user"] });
+        });
     })
     .catch((err: Error): void => {
       res.json({ success: false, errors: [err.message] });

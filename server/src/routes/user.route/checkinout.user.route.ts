@@ -37,7 +37,6 @@ export default function CheckInOutUserRoute(
     return;
   }
   const { code } = data;
-  logger.info({ code });
 
   const qrCodeTime: number = parseInt(atob(code)) / (QR_ROLL_TIME_S * 1000);
   if (isNaN(qrCodeTime)) {
