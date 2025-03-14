@@ -13,6 +13,7 @@ import cookieParser from "cookie-parser";
 import ApiRouter from "./routes/index.routes";
 import logger from "./utils/logger.util/index.logger.util";
 import { CLIENT_URL, PORT } from "./utils/const.utils";
+import { ResponseType } from "./utils/response.util";
 
 const app: Express = express();
 
@@ -41,10 +42,24 @@ app.get("/", (req: Request, res: Response): void => {
 });
 
 // error handler
-app.use((err: Error, req: Request, res: Response, next: NextFunction): void => {
-  logger.error(err);
-  res.status(500).send("Internal server error");
-});
+app.use(
+  (
+    err: Error | string[],
+    req: Request,
+    res: Response<ResponseType>,
+    next: NextFunction
+  ): void => {
+    if (Array.isArray(err)) {
+      logger.error(err);
+      res.json({
+        success: false,
+        errors: err,
+      });
+    }
+    logger.error(err);
+    res.status(500).end();
+  }
+);
 
 app.listen(PORT, (): void => {
   console.clear();

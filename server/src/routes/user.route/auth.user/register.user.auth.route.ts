@@ -9,7 +9,7 @@ import {
   userUIDSchema,
 } from "../../../utils/validation.util/user.validation";
 import { z, type ZodIssue } from "zod";
-import type { NextFunction, Request, Response } from "express";
+import type { Request, Response } from "express";
 import { createUser } from "../../../controller/user.controller";
 import { type ResponseType } from "../../../utils/response.util";
 import { createSession } from "../../../utils/auth.util/session.auth.util";
@@ -32,12 +32,14 @@ const userRegisterSchema: z.ZodObject<{
 
 export default function UserRegisterRoute(
   req: Request,
-  res: Response<ResponseType>,
-  next: NextFunction
+  res: Response<ResponseType>
 ): void {
   const { success, data, error } = userRegisterSchema.safeParse(req.body);
   if (!success) {
-    next(error.errors.map((error: ZodIssue): string => error.message));
+    res.json({
+      success: false,
+      errors: error.issues.map((issue: ZodIssue): string => issue.message),
+    });
     return;
   }
 

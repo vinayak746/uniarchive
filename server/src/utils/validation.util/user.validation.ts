@@ -24,7 +24,7 @@ export const userUIDSchema: ZodString = z
     message: "UID must be 10 characters long",
   })
   .regex(
-    // regex for UIDs in the format XXYYYZZZZZ or XXyyZZZZZ,
+    // regex for UIDs in the format XXYYYZZZZZ or XXyyyZZZZZ,
     // where the first two characters symbolize the batch,
     // the next three characters symbolize the department,
     // and the last five characters symbolize the roll number
