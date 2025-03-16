@@ -5,10 +5,12 @@ import logger from "../logger.util/index.logger.util";
 
 export function fetchBookData(
   isbn: string
-): Promise<Omit<BookInterface, keyof Document>> {
+): Promise<Omit<Omit<BookInterface, keyof Document>, "getAvailalbeCopies">> {
   return new Promise(
     (
-      resolve: (value: Omit<BookInterface, keyof Document>) => void,
+      resolve: (
+        value: Omit<Omit<BookInterface, keyof Document>, "getAvailalbeCopies">
+      ) => void,
       reject: (reason?: any) => void
     ): void => {
       try {
@@ -113,8 +115,8 @@ export function fetchBookData(
                                   }
 
                                   const bookInfo: Omit<
-                                    BookInterface,
-                                    keyof Document
+                                    Omit<BookInterface, keyof Document>,
+                                    "getAvailalbeCopies"
                                   > = {
                                     isbn,
                                     copies: Math.floor(Math.random() * 10) + 1,

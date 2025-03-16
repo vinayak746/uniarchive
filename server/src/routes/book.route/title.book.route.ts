@@ -24,7 +24,7 @@ export default function findTitleBooksRoute(
   req: Request,
   res: Response<
     ResponseType<{
-      books: Omit<BookInterface, keyof Document>[];
+      books: Omit<Omit<BookInterface, keyof Document>, "getAvailalbeCopies">[];
     }>
   >
 ): void {
@@ -47,7 +47,12 @@ export default function findTitleBooksRoute(
         success: true,
         data: {
           books: books.map(
-            (book: BookInterface): Omit<BookInterface, keyof Document> => ({
+            (
+              book: BookInterface
+            ): Omit<
+              Omit<BookInterface, keyof Document>,
+              "getAvailalbeCopies"
+            > => ({
               title: book.title,
               authors: book.authors,
               genres: book.genres,

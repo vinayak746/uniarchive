@@ -1,4 +1,11 @@
-import { type Document, type Model, model, Schema } from "mongoose";
+import {
+  CallbackWithoutResultAndOptionalError,
+  type Document,
+  type Model,
+  model,
+  Schema,
+} from "mongoose";
+import BookIssue, { BookIssueInterface } from "./issue.model";
 
 export enum BookGenre {
   DRAMA = "Drama",
@@ -18,6 +25,7 @@ export interface BookInterface extends Document {
   summary: string;
   coverImageUrl: string;
   rating: number;
+  getAvailalbeCopies: () => Promise<number>;
 }
 
 const BookSchema = new Schema<BookInterface>({
@@ -63,14 +71,36 @@ const BookSchema = new Schema<BookInterface>({
   summary: { type: String, required: false, default: "" },
 });
 
-BookSchema.pre("save", function (next) {
-  const book: BookInterface = this;
-  book.isbn = book.isbn.replaceAll("-", "");
-  book.coverImageUrl =
-    book.coverImageUrl ||
-    `https://covers.openlibrary.org/b/isbn/${book.isbn}-L.jpg`;
-  next();
-});
+BookSchema.pre(
+  "save",
+  function (next: CallbackWithoutResultAndOptionalError): void {
+    const book: BookInterface = this;
+    book.isbn = book.isbn.replaceAll("-", "");
+    book.coverImageUrl =
+      book.coverImageUrl ||
+      `https://covers.openlibrary.org/b/isbn/${book.isbn}-L.jpg`;
+    next();
+  }
+);
+
+BookSchema.methods.getAvailalbeCopies = function (): Promise<number> {
+  return new Promise(
+    (
+      resolve: (value: number) => void,
+      reject: (reason?: unknown) => void
+    ): void => {
+      BookIssue.find({
+        book: this._id,
+        returnDate: null,
+      })
+        .then((issues: BookIssueInterface[]): void => {
+          resolve(this.copies - issues.length);
+        })
+        .catch(reject);
+    }
+  );
+};
+
 const Book: Model<BookInterface> = model<BookInterface>("Book", BookSchema);
 
 export default Book;

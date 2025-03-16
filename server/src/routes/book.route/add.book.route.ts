@@ -42,22 +42,29 @@ export default function addBookRoute(
         return;
       }
       fetchBookData(isbn)
-        .then((bookData: Omit<BookInterface, keyof Document>): void => {
-          const newBook = new Book(bookData);
-          newBook
-            .save()
-            .then((): void => {
-              res.json({
-                success: true,
-                data: {
-                  title: bookData.title,
-                },
+        .then(
+          (
+            bookData: Omit<
+              Omit<BookInterface, keyof Document>,
+              "getAvailalbeCopies"
+            >
+          ): void => {
+            const newBook = new Book(bookData);
+            newBook
+              .save()
+              .then((): void => {
+                res.json({
+                  success: true,
+                  data: {
+                    title: bookData.title,
+                  },
+                });
+              })
+              .catch((err: Error): void => {
+                res.json({ success: false, errors: ["Cannot save user"] });
               });
-            })
-            .catch((err: Error): void => {
-              res.json({ success: false, errors: ["Cannot save user"] });
-            });
-        })
+          }
+        )
         .catch((err: Error): void => {
           res.json({ success: false, errors: ["Cannot find user"] });
         });

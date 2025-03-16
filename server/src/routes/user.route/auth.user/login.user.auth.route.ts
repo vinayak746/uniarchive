@@ -9,10 +9,6 @@ import { type ResponseType } from "../../../utils/response.util";
 import { type UserInterface } from "../../../db/models/user.model";
 import { createSession } from "../../../utils/auth.util/session.auth.util";
 
-type UserLoginBody = Pick<UserInterface, "uid"> & {
-  password: string;
-};
-
 const userLoginSchema: z.ZodObject<{
   uid: z.ZodString;
   password: z.ZodString;
@@ -34,7 +30,7 @@ export default function UserLoginRoute(
     return;
   }
 
-  getUserByUID(data.uid)
+  getUserByUID(data.uid.toUpperCase())
     .then((user: UserInterface): void => {
       user
         .comparePassword(data.password)
