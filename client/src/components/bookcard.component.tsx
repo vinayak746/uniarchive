@@ -5,7 +5,7 @@ import { Link, LinkProps } from "react-router-dom";
 
 interface BookCardProps extends Omit<LinkProps, "to"> {
   size?: "sm" | "md" | "lg" | "custom";
-  book: BookInterface;
+  book: Omit<BookInterface, "_id">;
 }
 
 function BookCard({
