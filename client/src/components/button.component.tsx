@@ -12,7 +12,7 @@ function Button({
 }: ButtonProps): JSX.Element {
   return (
     <button
-      className={`flex justify-center items-center px-4 py-2 gap-2 outline-none font-semibold text-white bg-tertiary rounded-lg w-3/4 cursor-pointer ${className}`}
+      className={`flex justify-center items-center px-4 py-2 gap-2 outline-none font-semibold text-white bg-tertiary rounded-lg w-3/4 cursor-pointer hover:ring-4 ring-tertiary/40 duration-100 ${className}`}
       {...rest}>
       {children}
       {icon}

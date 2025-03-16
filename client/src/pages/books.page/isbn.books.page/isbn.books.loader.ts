@@ -1,22 +1,28 @@
-import { LoaderFunction, LoaderFunctionArgs } from "react-router-dom";
-import { BookInterface } from "../../../types/books.types";
-import server from "../../../utils/axios.util";
-import { toast } from "react-toastify";
 import { AxiosResponse } from "axios";
+import { toast } from "react-toastify";
+import server from "../../../utils/axios.util";
+import { BookInterface } from "../../../types/books.types";
 import { ResponseType } from "../../../utils/response.util";
+import { LoaderFunction, LoaderFunctionArgs } from "react-router-dom";
 
 const ISBNBookLoader: LoaderFunction = ({
   params,
 }: LoaderFunctionArgs): Promise<
   | Response
   | {
-      book: BookInterface;
+      book: BookInterface & {
+        available: boolean;
+        alreadyBorrowed: boolean | null;
+      };
     }
 > => {
   return new Promise<
     | Response
     | {
-        book: BookInterface;
+        book: BookInterface & {
+          available: boolean;
+          alreadyBorrowed: boolean | null;
+        };
       }
   >(
     (
@@ -24,13 +30,15 @@ const ISBNBookLoader: LoaderFunction = ({
         value:
           | Response
           | {
-              book: BookInterface;
+              book: BookInterface & {
+                available: boolean;
+                alreadyBorrowed: boolean | null;
+              };
             }
       ) => void,
       reject: (reason?: unknown) => void
     ): void => {
       const isbn: string | undefined = params.isbn;
-      console.log({ isbn });
       if (!isbn) {
         reject("ISBN is required");
         return;
@@ -42,7 +50,9 @@ const ISBNBookLoader: LoaderFunction = ({
             data,
           }: AxiosResponse<
             ResponseType<{
-              book: BookInterface;
+              book: BookInterface & {
+                available: boolean;
+              };
             }>
           >): void => {
             if (!data.success) {
@@ -51,10 +61,12 @@ const ISBNBookLoader: LoaderFunction = ({
               });
               return;
             }
-            console.log({
-              book: data.data?.book as BookInterface,
+            resolve({
+              book: data.data?.book as BookInterface & {
+                available: boolean;
+                alreadyBorrowed: boolean | null;
+              },
             });
-            resolve({ book: data.data?.book as BookInterface });
           }
         )
         .catch((): void => {

@@ -8,13 +8,17 @@ interface PagesProps {
 }
 
 function RoutesView({
-  parentPath = "",
+  parentPath = "/",
   routes,
   level = 0,
 }: PagesProps): JSX.Element {
   parentPath = parentPath === "/" ? "" : parentPath;
+
   return (
-    <div className={`flex grow flex-col gap-2 justify-center items-centerm`}>
+    <div
+      className={`flex grow flex-col gap-10 justify-center items-center ${
+        !level && "px-10 sm:px-16 py-16"
+      }`}>
       {!level && (
         <>
           <div className={`flex justify-center items-center gap-4`}>
@@ -36,24 +40,27 @@ function RoutesView({
           </div>
         </>
       )}
-      <div className={`flex flex-col justify-center items-center`}>
-        <div className={`border-l flex flex-col`}>
+      <div className={`flex justify-center items-center ${level && "w-full"}`}>
+        <div className={`border-l flex flex-col grow`}>
           {routes.map((route: RouteObject): JSX.Element => {
-            route.path = route.path || "/";
+            if (!route.path) return <></>;
             return (
               <div
-                className={`${level ? "pl-4" : "px-4"} py-2 border-dark/50 ${
+                key={route.path}
+                className={`pl-4 py-2  w-full border-dark/50 justify-between flex flex-col ${
                   level % 2 ? "hover:bg-primary" : "hover:bg-secondary"
                 }`}>
                 <Link
-                  className={`flex justify-between items-center gap-4`}
+                  className={`flex grow justify-between items-center gap-4`}
                   to={
-                    parentPath === ""
-                      ? route.path
-                      : parentPath + "/" + route.path
+                    level
+                      ? `${parentPath}/${route.path === "/" ? "" : route.path}`
+                      : route.path
                   }>
-                  {route.path}
-                  {route.id && ` ~ ${route.id}`}
+                  <div className={`w-full min-w-max`}>
+                    {route.path}
+                    {route.id && ` ~ ${route.id}`}
+                  </div>
                   <div className={`flex justify-center items-center`}>
                     {
                       <div
@@ -76,7 +83,9 @@ function RoutesView({
                 </Link>
                 {route.children?.length && (
                   <RoutesView
-                    parentPath={route.path}
+                    parentPath={`${parentPath}${
+                      !route.path.startsWith("/") ? "/" : ""
+                    }${route.path}`}
                     level={level + 1}
                     routes={route.children}
                   />

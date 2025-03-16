@@ -37,9 +37,7 @@ function BookCard({
           <div
             className={`w-full overflow-hidden text-nowrap text-ellipsis font-semibold text-dark/80 ${
               size === "sm" ? "text-sm" : size === "md" ? "text-lg" : "text-2xl"
-            } ${size === "lg" && "line-clamp-2"}
-              
-              }`}
+            } ${size === "lg" && "line-clamp-2"}`}
             title={book.title}>
             {book.title}
           </div>

@@ -1,30 +1,31 @@
-import { RouteObject } from "react-router-dom";
-import Layout from "./components/layout.component/layout";
 import HomePage from "./pages/home.page/home.page";
+import { type RouteObject } from "react-router-dom";
 import LoginPage from "./pages/login.page/login.page";
-import SystemLayout from "./pages/system.page/index.system.page";
-import LogoutAction from "./pages/logout.page/logout.loader";
-import LoadingSpinner from "./components/loadingspinner.component";
+import Layout from "./components/layout.component/layout";
 import LoginAction from "./pages/login.page/login.action";
 import LoginLoader from "./pages/login.page/login.loader";
+import LogoutAction from "./pages/logout.page/logout.loader";
 import RegisterPage from "./pages/register.page/register.page";
 import NotFoundPage from "./pages/notfound.page/notfound.page";
+import SystemLayout from "./pages/system.page/index.system.page";
+import LoadingSpinner from "./components/loadingspinner.component";
 import RoutesView from "./pages/routes_view.page/routes_view.page";
 import RegisterAction from "./pages/register.page/register.action";
 import RegisterLoader from "./pages/register.page/register.loader";
-import RootLayoutLoader from "./components/layout.component/layout.loader";
-import CheckInOutPage from "./pages/checkin_out.page/checkin_out.page";
-import CheckInOutLoader from "./pages/checkin_out.page/checkin_out.loader";
-import CheckInOutSystemPage from "./pages/system.page/checkinout.system.page/checkinout.system.page";
-import AddBookPage from "./pages/system.page/book.system.page/add.book.system.page/add.book.system.page";
-import BookSystemPage from "./pages/system.page/book.system.page/index.book.system.page";
-import addBookAction from "./pages/system.page/book.system.page/add.book.system.page/add.book.system.action";
-import bookSystemLoader from "./pages/system.page/book.system.page/index.book.system.loader";
 import BookCategoryPage from "./pages/books.page/index.books.page";
 import bookCategoryLoader from "./pages/books.page/index.books.loader";
-import bookSearchAction from "./components/navbar.comoponent/navbar.component.action";
+import CheckInOutPage from "./pages/checkin_out.page/checkin_out.page";
+import RootLayoutLoader from "./components/layout.component/layout.loader";
+import CheckInOutLoader from "./pages/checkin_out.page/checkin_out.loader";
 import BookByISBNPage from "./pages/books.page/isbn.books.page/isbn.books.page";
 import ISBNBookLoader from "./pages/books.page/isbn.books.page/isbn.books.loader";
+import issueBookAction from "./pages/books.page/isbn.books.page/isbn.books.action";
+import bookSearchAction from "./components/navbar.comoponent/navbar.component.action";
+import BookSystemPage from "./pages/system.page/book.system.page/index.book.system.page";
+import bookSystemLoader from "./pages/system.page/book.system.page/index.book.system.loader";
+import CheckInOutSystemPage from "./pages/system.page/checkinout.system.page/checkinout.system.page";
+import AddBookPage from "./pages/system.page/book.system.page/add.book.system.page/add.book.system.page";
+import addBookAction from "./pages/system.page/book.system.page/add.book.system.page/add.book.system.action";
 
 let routes: RouteObject[] = [];
 routes = [
@@ -84,11 +85,11 @@ routes = [
       },
       {
         loader: CheckInOutLoader,
-        path: "/checkin-out",
+        path: "checkin-out",
         element: <CheckInOutPage />,
       },
       {
-        path: "/*",
+        path: "*",
         element: <NotFoundPage />,
       },
       {
@@ -107,6 +108,7 @@ routes = [
             loader: ISBNBookLoader,
             path: "isbn/:isbn",
             element: <BookByISBNPage />,
+            action: issueBookAction,
           },
         ],
         loader: bookCategoryLoader,

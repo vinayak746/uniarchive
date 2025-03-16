@@ -7,6 +7,7 @@ export enum BookGenre {
   PSYCHOLOGY = "Psychology",
 }
 export interface BookInterface {
+  _id: string;
   isbn: string;
   copies: number;
   title: string;

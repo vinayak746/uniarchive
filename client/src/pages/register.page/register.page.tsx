@@ -19,8 +19,8 @@ function RegisterPage(): JSX.Element {
             required
             labelText={`Name`}
             type={`text`}
-            min={3}
-            max={50}
+            minLength={3}
+            maxLength={50}
             placeholder={`Name`}
           />
           <Input
@@ -28,8 +28,8 @@ function RegisterPage(): JSX.Element {
             required
             labelText={`UID`}
             type={`text`}
-            min={10}
-            max={10}
+            minLength={10}
+            maxLength={10}
             placeholder={`UID`}
           />
           <Input
@@ -37,11 +37,11 @@ function RegisterPage(): JSX.Element {
             name={"password"}
             labelText={`Password`}
             type={`password`}
-            min={8}
-            max={50}
+            minLength={8}
+            maxLength={50}
             placeholder={`Password`}
           />
-          <div className={`hidden w-full`}>
+          <div className={` w-full`}>
             <Select
               labelText={`Role`}
               options={[

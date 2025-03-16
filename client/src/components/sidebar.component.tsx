@@ -1,11 +1,11 @@
 import {
-  Star,
   Home,
   LogOut,
+  History,
+  FileText,
   Settings,
   SidebarOpen,
   SidebarClose,
-  FileText,
 } from "lucide-react";
 import {
   Form,
@@ -54,9 +54,9 @@ function Sidebar(): JSX.Element {
                   isActive && "bg-secondary font-medium"
                 }`
               }
-              to={`/highlights`}>
-              <Star size={18} />
-              Highlights
+              to={`/history`}>
+              <History size={18} />
+              History
             </NavLink>
           </li>
           <li>
