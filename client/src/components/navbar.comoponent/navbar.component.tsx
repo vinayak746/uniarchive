@@ -84,18 +84,31 @@ function Navbar({
                   />
                   {bookFetcher.data?.books ? (
                     <div
-                      className={`absolute hidden group-focus-within:flex flex-col gap-1 w-full top-12 left-0 bg-white rounded-xl border border-dark/50 shadow-lg p-2`}>
+                      className={`absolute snap-y max-h-54 overflow-auto scrollbar hidden group-focus-within:flex flex-col gap-1 w-full top-12 left-0 bg-white rounded-xl border border-dark/50 shadow-lg p-2`}>
                       {bookFetcher.data?.books.length !== 0 ? (
-                        bookFetcher.data?.books.slice(0, 5).map(
-                          (book: BookInterface): JSX.Element => (
-                            <Link
-                              key={book.isbn}
-                              to={`/books/isbn/${book.isbn}`}
-                              className={`px-2 py-1 text-sm w-full hover:bg-primary rounded-md overflow-hidden text-ellipsis`}>
-                              {book.title}
-                            </Link>
-                          )
-                        )
+                        <>
+                          <div
+                            className={`sticky snap-start -top-2 left-0 bg-white p-2`}>
+                            {bookFetcher.data?.books.length} books found
+                          </div>
+                          {bookFetcher.data?.books.map(
+                            (book: BookInterface): JSX.Element => (
+                              <Link
+                                key={book.isbn}
+                                to={`/books/isbn/${book.isbn}`}
+                                className={`px-2 py-1 snap-start min-h-fit text-sm w-full hover:bg-primary rounded-md overflow-hidden text-ellipsis`}>
+                                <div className={`flex gap-2`}>
+                                  <img
+                                    className={`w-10 h-10 rounded-sm`}
+                                    src={book.coverImageUrl}
+                                    alt={`${book.title}'s cover`}
+                                  />
+                                  <div>{book.title}</div>
+                                </div>
+                              </Link>
+                            )
+                          )}
+                        </>
                       ) : (
                         <div className={`p-2 flex gap-2 justify-between`}>
                           No books found

@@ -1,7 +1,7 @@
 import { JSX } from "react";
 import { Star } from "lucide-react";
 import ISBNBookLoader from "./isbn.books.loader";
-import { Form, useLoaderData } from "react-router-dom";
+import { Form, Link, useLoaderData } from "react-router-dom";
 import Button from "../../../components/button.component";
 import { BookGenre, BookInterface } from "../../../types/books.types";
 
@@ -85,12 +85,13 @@ function BookByISBNPage(): JSX.Element {
           <div title={`Genres`} className={`flex gap-2 flex-wrap lg:max-w-lg`}>
             {book.genres.map(
               (genre: BookGenre): JSX.Element => (
-                <span
-                  title={genre}
+                <Link
+                  title={`Genre: ${genre}`}
+                  to={`/books/genre/${genre}`}
                   key={genre}
-                  className={`text-sm cursor-default py-0.5 px-2.5 text-white font-medium rounded-full bg-dark/80`}>
+                  className={`text-sm py-0.5 px-2.5 text-white font-medium rounded-full bg-dark/80`}>
                   {genre}
-                </span>
+                </Link>
               )
             )}
           </div>

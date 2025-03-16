@@ -2,11 +2,7 @@
 
 ### Rules & Regulations
 
-### Books Archive
-
-> Browse through books and filter by genre, author, title and/or other basis.
-
-### Highlights
+### issue history
 
 > Show Popular Books, and the ones saved by the user.
 
