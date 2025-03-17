@@ -22,7 +22,7 @@ function BookCategoryPage(): JSX.Element {
     (book: BookInterface): boolean => !genre || book.genres.includes(genre)
   );
   return (
-    <div className={`flex grow justify-center items-center flex-wrap gap-4`}>
+    <div className={`flex grow justify-center flex-wrap gap-4`}>
       {/* show total book count */}
       <div
         className={`w-full text-center flex justify-center items-center gap-4`}>

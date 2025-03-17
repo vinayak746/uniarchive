@@ -39,7 +39,9 @@ function Sidebar(): JSX.Element {
             <NavLink
               className={({ isActive }: NavLinkRenderProps): string =>
                 `flex items-center gap-2 px-3 rounded-lg py-2 ${
-                  isActive && "bg-secondary font-medium"
+                  isActive
+                    ? "bg-secondary font-medium"
+                    : " hover:bg-secondary/70 hover:ring ring-secondary duration-200"
                 }`
               }
               to={`/`}>
@@ -51,7 +53,9 @@ function Sidebar(): JSX.Element {
             <NavLink
               className={({ isActive }: NavLinkRenderProps): string =>
                 `flex items-center gap-2 px-3 rounded-lg py-2 ${
-                  isActive && "bg-secondary font-medium"
+                  isActive
+                    ? "bg-secondary font-medium"
+                    : " hover:bg-secondary/70 hover:ring ring-secondary duration-200"
                 }`
               }
               to={`/history`}>
@@ -63,7 +67,9 @@ function Sidebar(): JSX.Element {
             <NavLink
               className={({ isActive }: NavLinkRenderProps): string =>
                 `flex items-center gap-2 px-3 rounded-lg py-2 ${
-                  isActive && "bg-secondary font-medium"
+                  isActive
+                    ? "bg-secondary font-medium"
+                    : " hover:bg-secondary/70 hover:ring ring-secondary duration-200"
                 }`
               }
               to={`/polocies`}>
@@ -75,7 +81,9 @@ function Sidebar(): JSX.Element {
             <NavLink
               className={({ isActive }: NavLinkRenderProps): string =>
                 `flex items-center gap-2 px-3 rounded-lg py-2 ${
-                  isActive && "bg-secondary font-medium"
+                  isActive
+                    ? "bg-secondary font-medium"
+                    : " hover:bg-secondary/70 hover:ring ring-secondary duration-200"
                 }`
               }
               to={`/settings`}>
@@ -88,7 +96,7 @@ function Sidebar(): JSX.Element {
       {loggedIn && (
         <Form method={"POST"} action={"/logout"}>
           <button
-            className={`flex items-center cursor-pointer gap-2 px-3 rounded-lg py-2 ${
+            className={`flex items-center cursor-pointer gap-2 px-3 rounded-lg py-2 hover:bg-secondary duration-200 ${
               isOpen || "hidden"
             }`}>
             <LogOut size={18} />

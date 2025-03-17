@@ -25,8 +25,8 @@ function BookCard({
           : size === "md"
           ? "sm:w-48"
           : size === "lg" && "sm:w-64"
-      } flex flex-col justify-between object-cover rounded-lg ${className}`}>
-      <div className={`flex flex-col gap-2`}>
+      } flex flex-col justify-between grow object-cover rounded-lg ${className}`}>
+      <div className={`w-ful flex flex-col gap-2`}>
         <img
           loading={"lazy"}
           src={book.coverImageUrl}
@@ -35,9 +35,15 @@ function BookCard({
         />
         <div className={`w-full`}>
           <div
-            className={`w-full overflow-hidden text-nowrap text-ellipsis font-semibold text-dark/80 ${
+            className={`w-32 ${
+              size == "sm"
+                ? "sm:w-40"
+                : size === "md"
+                ? "sm:w-48"
+                : size === "lg" && "sm:w-64"
+            } overflow-hidden text-ellipsis font-semibold text-dark/80 ${
               size === "sm" ? "text-sm" : size === "md" ? "text-lg" : "text-2xl"
-            } ${size === "lg" && "line-clamp-2"}`}
+            } line-clamp-2`}
             title={book.title}>
             {book.title}
           </div>
@@ -48,7 +54,9 @@ function BookCard({
           </div>
         </div>
       </div>
-      <div title={`${book.rating} rating`} className={`flex gap-1`}>
+      <div
+        title={`${book.rating.toPrecision(2)} rating`}
+        className={`flex gap-1`}>
         {Array(5)
           .fill(0)
           .map(

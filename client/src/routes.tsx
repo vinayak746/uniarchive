@@ -1,31 +1,33 @@
-import HomePage from "./pages/home.page/home.page";
+import HomePage from "./pages/home/home.page";
 import { type RouteObject } from "react-router-dom";
-import LoginPage from "./pages/login.page/login.page";
+import LoginPage from "./pages/login/login.page";
 import Layout from "./components/layout.component/layout";
-import LoginAction from "./pages/login.page/login.action";
-import LoginLoader from "./pages/login.page/login.loader";
-import LogoutAction from "./pages/logout.page/logout.loader";
-import RegisterPage from "./pages/register.page/register.page";
-import NotFoundPage from "./pages/notfound.page/notfound.page";
-import SystemLayout from "./pages/system.page/index.system.page";
+import LoginAction from "./pages/login/login.action";
+import LoginLoader from "./pages/login/login.loader";
+import LogoutAction from "./pages/logout/logout.loader";
+import RegisterPage from "./pages/register/register.page";
+import NotFoundPage from "./pages/notfound/notfound.page";
+import SystemLayout from "./pages/system/index.system.page";
 import LoadingSpinner from "./components/loadingspinner.component";
-import RoutesView from "./pages/routes_view.page/routes_view.page";
-import RegisterAction from "./pages/register.page/register.action";
-import RegisterLoader from "./pages/register.page/register.loader";
-import BookCategoryPage from "./pages/books.page/index.books.page";
-import bookCategoryLoader from "./pages/books.page/index.books.loader";
-import CheckInOutPage from "./pages/checkin_out.page/checkin_out.page";
+import RoutesView from "./pages/routes_view/routes_view.page";
+import RegisterAction from "./pages/register/register.action";
+import RegisterLoader from "./pages/register/register.loader";
+import BookCategoryPage from "./pages/books/index.books.page";
+import bookCategoryLoader from "./pages/books/index.books.loader";
+import CheckInOutPage from "./pages/checkin_out/checkin_out.page";
 import RootLayoutLoader from "./components/layout.component/layout.loader";
-import CheckInOutLoader from "./pages/checkin_out.page/checkin_out.loader";
-import BookByISBNPage from "./pages/books.page/isbn.books.page/isbn.books.page";
-import ISBNBookLoader from "./pages/books.page/isbn.books.page/isbn.books.loader";
-import issueBookAction from "./pages/books.page/isbn.books.page/isbn.books.action";
+import CheckInOutLoader from "./pages/checkin_out/checkin_out.loader";
+import BookByISBNPage from "./pages/books/isbn.books/isbn.books.page";
+import ISBNBookLoader from "./pages/books/isbn.books/isbn.books.loader";
+import issueBookAction from "./pages/books/isbn.books/isbn.books.action";
 import bookSearchAction from "./components/navbar.comoponent/navbar.component.action";
-import BookSystemPage from "./pages/system.page/book.system.page/index.book.system.page";
-import bookSystemLoader from "./pages/system.page/book.system.page/index.book.system.loader";
-import CheckInOutSystemPage from "./pages/system.page/checkinout.system.page/checkinout.system.page";
-import AddBookPage from "./pages/system.page/book.system.page/add.book.system.page/add.book.system.page";
-import addBookAction from "./pages/system.page/book.system.page/add.book.system.page/add.book.system.action";
+import BookSystemPage from "./pages/system/book.system/index.book.system.page";
+import bookSystemLoader from "./pages/system/book.system/index.book.system.loader";
+import CheckInOutSystemPage from "./pages/system/checkinout.system/checkinout.system.page";
+import AddBookPage from "./pages/system/book.system/add.book.system.page/add.book.system.page";
+import addBookAction from "./pages/system/book.system/add.book.system.page/add.book.system.action";
+import HistoryPage from "./pages/history/history.page";
+import historyLoader from "./pages/history/history.loader";
 
 let routes: RouteObject[] = [];
 routes = [
@@ -112,6 +114,11 @@ routes = [
           },
         ],
         loader: bookCategoryLoader,
+      },
+      {
+        path: "history",
+        element: <HistoryPage />,
+        loader: historyLoader,
       },
     ],
     id: "layout",

@@ -85,12 +85,14 @@ function Navbar({
                   {bookFetcher.data?.books ? (
                     <div
                       className={`absolute snap-y max-h-54 overflow-auto scrollbar hidden group-focus-within:flex flex-col gap-1 w-full top-12 left-0 bg-white rounded-xl border border-dark/50 shadow-lg p-2`}>
+                      <div
+                        className={`${
+                          !bookFetcher.data.books.length && "hidden"
+                        } sticky snap-start -top-2 left-0 bg-white p-2`}>
+                        {bookFetcher.data?.books.length} books found
+                      </div>
                       {bookFetcher.data?.books.length !== 0 ? (
                         <>
-                          <div
-                            className={`sticky snap-start -top-2 left-0 bg-white p-2`}>
-                            {bookFetcher.data?.books.length} books found
-                          </div>
                           {bookFetcher.data?.books.map(
                             (book: BookInterface): JSX.Element => (
                               <Link
@@ -111,7 +113,7 @@ function Navbar({
                         </>
                       ) : (
                         <div className={`p-2 flex gap-2 justify-between`}>
-                          No books found
+                          No book found
                           <BookX className={`text-dark/80`} size={20} />
                         </div>
                       )}
