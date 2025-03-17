@@ -76,9 +76,6 @@ export default function findISBNBookRoute(
             returnDate: null,
           })
             .then((issue: BookIssueInterface | null): void => {
-              logger.info({
-                alreadyBorrowed: issue,
-              });
               res.json({
                 success: true,
                 data: {

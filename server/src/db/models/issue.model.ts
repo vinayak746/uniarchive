@@ -8,6 +8,7 @@ import {
 } from "mongoose";
 import User, { type UserInterface } from "./user.model";
 import { getLoanPeriod } from "../../utils/calc.util/issue.calc.util";
+import logger from "../../utils/logger.util/index.logger.util";
 
 export enum IssueStatus {
   ISSUED = "Issued",
@@ -45,13 +46,14 @@ BookIssueSchema.pre(
     User.findById(userId)
       .then((user: UserInterface | null): void => {
         if (user) {
+          issue.dueDate = new Date(issue.issueDate);
           issue.dueDate.setDate(
             issue.issueDate.getDate() + getLoanPeriod(user.role)
           );
+          next();
         }
       })
       .catch(next);
-    next();
   }
 );
 
@@ -72,7 +74,7 @@ BookIssueSchema.methods.getFineAmount = function (): number {
     const days: number = Math.floor(
       (new Date().getTime() - issue.dueDate.getTime()) / (1000 * 60 * 60 * 24)
     );
-    return days * 10;
+    return days * 5;
   }
   return 0;
 };

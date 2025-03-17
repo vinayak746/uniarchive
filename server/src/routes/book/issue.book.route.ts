@@ -97,7 +97,6 @@ export default function issueBookRoute(
               book
                 .getAvailalbeCopies()
                 .then((copies: number): void => {
-                  logger.info({ copies });
                   if (copies <= 0) {
                     res.json({
                       success: false,
