@@ -74,7 +74,7 @@ BookIssueSchema.methods.getFineAmount = function (): number {
     const days: number = Math.floor(
       (new Date().getTime() - issue.dueDate.getTime()) / (1000 * 60 * 60 * 24)
     );
-    return days * 5;
+    return days * 5; // 5 rupees per day fine
   }
   return 0;
 };
