@@ -21,8 +21,6 @@ import BookByISBNPage from "./pages/books/isbn.books/isbn.books.page";
 import ISBNBookLoader from "./pages/books/isbn.books/isbn.books.loader";
 import issueBookAction from "./pages/books/isbn.books/isbn.books.action";
 import bookSearchAction from "./components/navbar.comoponent/navbar.component.action";
-import BookSystemPage from "./pages/system/book.system/index.book.system.page";
-import bookSystemLoader from "./pages/system/book.system/index.book.system.loader";
 import CheckInOutSystemPage from "./pages/system/checkinout.system/checkinout.system.page";
 import AddBookPage from "./pages/system/book.system/add.book.system.page/add.book.system.page";
 import addBookAction from "./pages/system/book.system/add.book.system.page/add.book.system.action";
@@ -41,6 +39,7 @@ routes = [
   {
     loader: RegisterLoader,
     action: RegisterAction,
+    hydrateFallbackElement: <LoadingSpinner />,
     path: "/register",
     element: <RegisterPage />,
   },
@@ -59,11 +58,6 @@ routes = [
       {
         path: "book",
         children: [
-          {
-            index: true,
-            loader: bookSystemLoader,
-            element: <BookSystemPage />,
-          },
           {
             action: addBookAction,
             path: "add",
@@ -99,20 +93,24 @@ routes = [
         id: "all-books",
         children: [
           {
-            element: <BookCategoryPage />,
+            hydrateFallbackElement: <LoadingSpinner />,
             index: true,
+            element: <BookCategoryPage />,
           },
           {
+            hydrateFallbackElement: <LoadingSpinner />,
             path: "genre/:genre",
             element: <BookCategoryPage />,
           },
           {
             loader: ISBNBookLoader,
+            hydrateFallbackElement: <LoadingSpinner />,
             path: "isbn/:isbn",
             element: <BookByISBNPage />,
             action: issueBookAction,
           },
         ],
+        hydrateFallbackElement: <LoadingSpinner />,
         loader: bookCategoryLoader,
       },
       {

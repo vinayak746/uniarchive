@@ -1,16 +1,11 @@
 # FEATURES
 
-### Rules & Regulations
-
-### issue history
-
+> Rules & Regulations page.
 > Show Popular Books, and the ones saved by the user.
 
 ### Settings
 
-> User Profile Settings
-> Pswd change
-> NSFW toggle?
+> User Profile Settings and password change
 
 # BUGS
 

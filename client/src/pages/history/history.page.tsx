@@ -14,19 +14,35 @@ export default function HistoryPage(): JSX.Element {
     <div className={`flex flex-col grow gap-4`}>
       <h1 className={`text-2xl font-medium`}>History</h1>
       <div className={`flex flex-wrap gap-4 sm:gap-8`}>
-        {issues.map(
-          (issue: {
-            _id: string;
-            book: BookInterface;
-            issueDate: Date;
-            dueDate: Date;
-            returnDate: Date;
-            fineAmount: number;
-            status: IssueStatus;
-          }): ReactNode => {
-            return <HistoryCard key={issue._id} issue={issue} />;
-          }
-        )}
+        {issues
+          .sort(
+            (
+              issue1: {
+                issueDate: Date;
+              },
+              issue2: {
+                issueDate: Date;
+              }
+            ): number => {
+              return (
+                new Date(issue2.issueDate).getTime() -
+                new Date(issue1.issueDate).getTime()
+              );
+            }
+          )
+          .map(
+            (issue: {
+              _id: string;
+              book: BookInterface;
+              issueDate: Date;
+              dueDate: Date;
+              returnDate: Date;
+              fineAmount: number;
+              status: IssueStatus;
+            }): ReactNode => {
+              return <HistoryCard key={issue._id} issue={issue} />;
+            }
+          )}
       </div>
     </div>
   );

@@ -148,7 +148,9 @@ function Navbar({
             <NavLink
               className={({ isActive }: NavLinkRenderProps): string =>
                 `px-4 py-2 rounded-lg flex justify-center items-center gap-2 duration-100 ${
-                  isActive && "bg-tertiary font-medium text-white"
+                  isActive
+                    ? "bg-tertiary font-medium text-white"
+                    : "hover:bg-secondary hover:ring ring-white"
                 }`
               }
               end
@@ -160,7 +162,9 @@ function Navbar({
             <NavLink
               className={({ isActive }: NavLinkRenderProps): string =>
                 `px-4 py-2 rounded-lg flex justify-center items-center gap-2 duration-100 ${
-                  isActive && "bg-tertiary font-medium text-white"
+                  isActive
+                    ? "bg-tertiary font-medium text-white"
+                    : "hover:bg-secondary hover:ring ring-white"
                 }`
               }
               to="/books/genre/fantasy">
@@ -172,7 +176,9 @@ function Navbar({
             <NavLink
               className={({ isActive }: NavLinkRenderProps): string =>
                 `px-4 py-2 rounded-lg flex justify-center items-center gap-2 duration-100 ${
-                  isActive && "bg-tertiary font-medium text-white"
+                  isActive
+                    ? "bg-tertiary font-medium text-white"
+                    : "hover:bg-secondary hover:ring ring-white"
                 }`
               }
               to="/books/genre/drama">
@@ -184,7 +190,9 @@ function Navbar({
             <NavLink
               className={({ isActive }: NavLinkRenderProps): string =>
                 `px-4 py-2 rounded-lg flex justify-center items-center gap-2 duration-100 ${
-                  isActive && "bg-tertiary font-medium text-white"
+                  isActive
+                    ? "bg-tertiary font-medium text-white"
+                    : "hover:bg-secondary hover:ring ring-white"
                 }`
               }
               to="/books/genre/detective">
@@ -196,7 +204,9 @@ function Navbar({
             <NavLink
               className={({ isActive }: NavLinkRenderProps): string =>
                 `px-4 py-2 rounded-lg flex justify-center items-center gap-2 duration-100 ${
-                  isActive && "bg-tertiary font-medium text-white"
+                  isActive
+                    ? "bg-tertiary font-medium text-white"
+                    : "hover:bg-secondary hover:ring ring-white"
                 }`
               }
               to="/books/genre/education">
@@ -208,7 +218,9 @@ function Navbar({
             <NavLink
               className={({ isActive }: NavLinkRenderProps): string =>
                 `px-4 py-2 rounded-lg flex justify-center items-center gap-2 duration-100 ${
-                  isActive && "bg-tertiary font-medium text-white"
+                  isActive
+                    ? "bg-tertiary font-medium text-white"
+                    : "hover:bg-secondary hover:ring ring-white"
                 }`
               }
               to="/books/genre/psychology">
@@ -220,7 +232,9 @@ function Navbar({
             <NavLink
               className={({ isActive }: NavLinkRenderProps): string =>
                 `px-4 py-2 rounded-lg flex justify-center items-center gap-2 duration-100 ${
-                  isActive && "bg-tertiary font-medium text-white"
+                  isActive
+                    ? "bg-tertiary font-medium text-white"
+                    : "hover:bg-secondary hover:ring ring-white"
                 }`
               }
               to="/books/genre/business">
