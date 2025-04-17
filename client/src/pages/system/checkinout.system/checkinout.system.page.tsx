@@ -21,7 +21,7 @@ function CheckInOutSystemPage(): JSX.Element {
       className={`flex flex-col w-full grow justify-center items-center p-8 gap-8`}>
       <div className={`text-center flex flex-col justify-center items-center`}>
         <h1 className={`text-3xl font-bold`}>Check In/Out System</h1>
-        <p className={`text-lg`}>Scan the QR code to check in or out</p>
+        <div className={`text-lg`}>Scan the QR code to check in or out</div>
       </div>
       <QRCode bgColor={"#f9f3ee"} className={`w-full`} value={code} />
     </div>

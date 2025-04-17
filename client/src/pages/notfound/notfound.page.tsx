@@ -9,10 +9,10 @@ function NotFoundPage(): JSX.Element {
           <br />
           Error 404
         </h1>
-        <p className={`text-2xl max-w-md text-dark/80`}>
+        <div className={`text-2xl max-w-md text-dark/80`}>
           We couldn't find that book...or page. Perhaps it's on a different
           shelf?
-        </p>
+        </div>
       </div>
     </div>
   );

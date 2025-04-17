@@ -19,9 +19,9 @@ export default function HistoryCard({ issue }: HistoryPageProps): JSX.Element {
               className={`h-60 aspect-[3/4] object-cover rounded-lg`}
             />
           </div>
-          <p className={`text-sm sm:text-base max-w-40 line-clamp-2`}>
+          <div className={`text-sm sm:text-base max-w-40 line-clamp-2`}>
             {issue.book.authors.join(", ")}
-          </p>
+          </div>
         </div>
         <div className={`flex flex-col gap-2`}>
           <h1 className={`text-lg sm:text-2xl font-medium max-w-[16rem]`}>
