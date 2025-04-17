@@ -8,7 +8,7 @@ import { type Request, type Response } from "express";
 import { type ResponseType } from "../../../utils/response.util";
 import User, { type UserInterface } from "../../../db/models/user.model";
 
-type RefreshUserResponseData = Pick<UserInterface, "uid" | "name">;
+type RefreshUserResponseData = Pick<UserInterface, "uid" | "name" | "role">;
 
 export default function RefreshUserRoute(
   req: Request,
@@ -53,6 +53,7 @@ export default function RefreshUserRoute(
         data: {
           uid: user.uid,
           name: user.name,
+          role: user.role,
         },
       });
     })
