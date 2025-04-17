@@ -27,6 +27,7 @@ import addBookAction from "./pages/system/book.system/add.book.system.page/add.b
 import HistoryPage from "./pages/history/history.page";
 import historyLoader from "./pages/history/history.loader";
 import PoliciesPage from "./pages/policies/policies.page";
+import SettingsPage from "./pages/settings/settings.page";
 
 let routes: RouteObject[] = [];
 routes = [
@@ -60,11 +61,24 @@ routes = [
         path: "book",
         children: [
           {
+            index: true,
+
+            element: <NotFoundPage />,
+          },
+          {
             action: addBookAction,
             path: "add",
             element: <AddBookPage />,
           },
+          {
+            path: "*",
+            element: <NotFoundPage />,
+          },
         ],
+      },
+      {
+        path: "*",
+        element: <NotFoundPage />,
       },
     ],
   },
@@ -88,10 +102,6 @@ routes = [
         loader: CheckInOutLoader,
         path: "checkin-out",
         element: <CheckInOutPage />,
-      },
-      {
-        path: "*",
-        element: <NotFoundPage />,
       },
       {
         path: "books",
@@ -122,6 +132,14 @@ routes = [
         path: "history",
         element: <HistoryPage />,
         loader: historyLoader,
+      },
+      {
+        path: "settings",
+        element: <SettingsPage />,
+      },
+      {
+        path: "*",
+        element: <NotFoundPage />,
       },
     ],
     id: "layout",

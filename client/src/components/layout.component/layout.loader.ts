@@ -7,6 +7,7 @@ import { type ResponseType } from "../../utils/response.util";
 export type LoggedInUserData = {
   uid: string;
   name: string;
+  role: string;
 };
 
 export type SessionData =
@@ -15,10 +16,7 @@ export type SessionData =
     }
   | {
       loggedIn: true;
-      user: {
-        uid: string;
-        name: string;
-      };
+      user: LoggedInUserData;
     };
 
 const RootLayoutLoader: LoaderFunction = (): Promise<SessionData> => {
@@ -37,12 +35,14 @@ const RootLayoutLoader: LoaderFunction = (): Promise<SessionData> => {
               });
               return;
             }
-            const { uid, name } = data.data as unknown as LoggedInUserData;
+            const { uid, name, role } =
+              data.data as unknown as LoggedInUserData;
             resolve({
               loggedIn: true,
               user: {
                 uid,
                 name,
+                role,
               },
             });
           } else {
