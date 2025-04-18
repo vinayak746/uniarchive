@@ -8,7 +8,6 @@ import {
 } from "mongoose";
 import User, { type UserInterface } from "./user.model";
 import { getLoanPeriod } from "../../utils/calc.util/issue.calc.util";
-import logger from "../../utils/logger.util/index.logger.util";
 
 export enum IssueStatus {
   ISSUED = "Issued",
