@@ -1,10 +1,24 @@
 import { type JSX } from "react";
-import { Link } from "react-router-dom";
+import { Link, useLoaderData } from "react-router-dom";
 import { DoorOpen } from "lucide-react";
 import BookCard from "../../components/bookcard.component.tsx";
-import { BookGenre } from "../../types/books.types.ts";
+import { BookInterface } from "../../types/books.types.ts";
 
 function HomePage(): JSX.Element {
+  // const recommendedBooks = useLoaderData() as {
+  //   books: Pick<
+  //     BookInterface,
+  //     "coverImageUrl" | "isbn" | "summary" | "authors" | "rating"
+  //   >[];
+  // }["books"];
+  // }
+  const { books: recommendedBooks } = useLoaderData() as {
+    books: Pick<
+      BookInterface,
+      "coverImageUrl" | "isbn" | "summary" | "authors" | "rating"
+    >[];
+  };
+
   return (
     <div className={`flex flex-col gap-8 p-8`}>
       <div
@@ -52,51 +66,27 @@ function HomePage(): JSX.Element {
             </button>
           </Link>
         </div>
-        <BookCard
-          book={{
-            coverImageUrl:
-              "https://admin.itsnicethat.com/images/XSRykZCRQhGROOBt6Yug8QTbykI=/95588/format-webp%7Cwidth-1440/54e335375c3e3c758b0000f5.jpg",
-            title: "Book Title",
-            authors: ["Author 1", "Author 2"],
-            rating: 4,
-            copies: 5,
-            genres: [BookGenre.BUSINESS, BookGenre.DETECTIVE],
-            isbn: "1234567890",
-            pages: 100,
-            summary: "Book Summary",
-          }}
-          size="lg"
-        />{" "}
-        <BookCard
-          book={{
-            coverImageUrl:
-              "https://admin.itsnicethat.com/images/XSRykZCRQhGROOBt6Yug8QTbykI=/95588/format-webp%7Cwidth-1440/54e335375c3e3c758b0000f5.jpg",
-            title: "Book Title",
-            authors: ["Author 1", "Author 2"],
-            rating: 4,
-            copies: 5,
-            genres: [BookGenre.BUSINESS, BookGenre.DETECTIVE],
-            isbn: "1234567890",
-            pages: 100,
-            summary: "Book Summary",
-          }}
-          size="md"
-        />{" "}
-        <BookCard
-          book={{
-            coverImageUrl:
-              "https://admin.itsnicethat.com/images/XSRykZCRQhGROOBt6Yug8QTbykI=/95588/format-webp%7Cwidth-1440/54e335375c3e3c758b0000f5.jpg",
-            title: "Book Title",
-            authors: ["Author 1", "Author 2"],
-            rating: 4,
-            copies: 5,
-            genres: [BookGenre.BUSINESS, BookGenre.DETECTIVE],
-            isbn: "1234567890",
-            pages: 100,
-            summary: "Book Summary",
-          }}
-          size="sm"
-        />
+        {recommendedBooks.map(
+          (
+            book: Pick<
+              BookInterface,
+              "coverImageUrl" | "isbn" | "summary" | "authors" | "rating"
+            >
+          ): JSX.Element => {
+            return (
+              <BookCard
+                book={{
+                  ...book,
+                  title: "The Great Gatsby",
+                  copies: 0,
+                  genres: [],
+                  pages: 0,
+                }}
+                size="lg"
+              />
+            );
+          }
+        )}
       </div>
     </div>
   );

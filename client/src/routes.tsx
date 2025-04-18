@@ -28,6 +28,7 @@ import HistoryPage from "./pages/history/history.page";
 import historyLoader from "./pages/history/history.loader";
 import PoliciesPage from "./pages/policies/policies.page";
 import SettingsPage from "./pages/settings/settings.page";
+import homeLoader from "./pages/home/home.loader";
 
 let routes: RouteObject[] = [];
 routes = [
@@ -89,6 +90,7 @@ routes = [
         path: "/",
         index: true,
         element: <HomePage />,
+        loader: homeLoader,
       },
       {
         path: "policies",
