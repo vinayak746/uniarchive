@@ -28,10 +28,13 @@ export default function recomemdedBookRoute(
           book: BookInterface | ObjectId;
         })[]
       ): void => {
-        const books: (BookInterface | ObjectId)[] = issues.map(
-          (issue: {
-            book: BookInterface | ObjectId;
-          }): BookInterface | ObjectId => issue.book
+        const books: BookInterface[] = issues.map(
+          (issue: { book: BookInterface | ObjectId }): BookInterface => {
+            if (isObjectIdOrHexString(issue.book)) {
+              return issue.book as BookInterface;
+            }
+            return issue.book as BookInterface;
+          }
         );
         const topBooks: {
           [key: string]: number;
@@ -40,18 +43,14 @@ export default function recomemdedBookRoute(
             acc: {
               [key: string]: number;
             },
-            bookId: BookInterface | ObjectId
+            book: BookInterface
           ): {
             [key: string]: number;
           } => {
-            if (isObjectIdOrHexString(bookId)) {
-              return acc;
-            }
-            bookId = (bookId as BookInterface)._id as ObjectId;
-            if (acc[String(bookId)]) {
-              acc[String(bookId)]++;
+            if (acc[String(book._id)]) {
+              acc[String(book._id)]++;
             } else {
-              acc[String(bookId)] = 1;
+              acc[String(book._id)] = 1;
             }
             return acc;
           },
@@ -71,41 +70,44 @@ export default function recomemdedBookRoute(
         res.status(200).json({
           success: true,
           data: {
-            books: sortedBooks.map(
-              ({
-                0: topBookId,
-              }: [string, number]): Pick<
-                BookInterface,
-                "coverImageUrl" | "isbn" | "summary" | "authors" | "rating"
-              > => {
-                const book: Pick<
+            books: sortedBooks
+              .filter(Boolean)
+              .map(
+                ({
+                  0: topBookId,
+                }: [string, number]): Pick<
                   BookInterface,
                   "coverImageUrl" | "isbn" | "summary" | "authors" | "rating"
-                > = books.find((book: BookInterface | ObjectId): boolean => {
-                  if (isObjectIdOrHexString(book)) {
-                    return false;
-                  }
-                  book = book as BookInterface;
-                  return String(book._id) === topBookId;
-                }) as Pick<
-                  BookInterface,
-                  "coverImageUrl" | "isbn" | "summary" | "authors" | "rating"
-                >;
-                return {
-                  coverImageUrl: book.coverImageUrl,
-                  isbn: book.isbn,
-                  summary: book.summary,
-                  authors: book.authors,
-                  rating: book.rating,
-                };
-              }
-            ),
+                > => {
+                  const book: Pick<
+                    BookInterface,
+                    "coverImageUrl" | "isbn" | "summary" | "authors" | "rating"
+                  > = books.find((book: BookInterface | ObjectId): boolean => {
+                    if (isObjectIdOrHexString(book)) {
+                      return false;
+                    }
+                    book = book as BookInterface;
+                    return String(book._id) === topBookId;
+                  }) as Pick<
+                    BookInterface,
+                    "coverImageUrl" | "isbn" | "summary" | "authors" | "rating"
+                  >;
+                  return {
+                    coverImageUrl: book.coverImageUrl,
+                    isbn: book.isbn,
+                    summary: book.summary,
+                    authors: book.authors,
+                    rating: book.rating,
+                  };
+                }
+              ),
           },
         });
       }
     )
-    .catch((error: Error) => {
-      res.status(500).json({
+    .catch((error: Error): void => {
+      console.error("Error fetching recommended books:", error);
+      res.json({
         success: false,
         errors: ["Error fetching recommended books"],
       });
